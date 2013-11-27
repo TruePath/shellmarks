@@ -1,0 +1,16 @@
+//bin/true; VERSION="%VERSION%"; return 0
+// Above magic is for configure to get version number
+// Generate automatically from scripts/versions.cc.src
+char	version[] = "%VERSION%";
+
+// Below magic is for scripts/makepkg, scripts/makepkg-release
+//#define HAVE_RELEASE_DATE
+#ifdef HAVE_RELEASE_DATE
+int	rel_day = %RELDAY%;
+int	rel_month = %RELMONTH% -1;
+int	rel_year = %RELYEAR% -1900;
+#else
+int	rel_day = 1;
+int	rel_month = 0;
+int	rel_year = 100;
+#endif

@@ -1,0 +1,102 @@
+<para>
+The <command>kcd</command> command is actually a shell function or shell alias so it must be setup 
+before you can type any kcd command.  You will have to use <command>kcdmain</command> 
+as the command name (since <command>kcd</command> command is not available yet) and
+use <command>eval</command> to introduce it to the shell.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>eval `kcdmain -ia`</command>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Install Bourne-style shell alias to invoke kcdmain install in <filename>/usr/bin</filename>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>eval `kcdmain -ic`</command>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Install C-style shell alias to invoke kcdmain install in <filename>/usr/bin</filename>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>eval `kcdmain -if`</command>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Install Bourne-style shell function to invoke kcdmain install in <filename>/usr/bin</filename>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>eval `kcdmain -ias <replaceable>DIR</replaceable>`</command>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Install Bourne-style shell alias to invoke kcdmain install in <replaceable>DIR</replaceable>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>eval `kcdmain -ics <replaceable>DIR</replaceable>`</command>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Install C-style shell alias to invoke kcdmain install in <replaceable>DIR</replaceable>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>eval `kcdmain -ifs <replaceable>DIR</replaceable>`</command>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Install Bourne-style shell function to invoke kcdmain install in <replaceable>DIR</replaceable>.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>
+Other shell function or shell alias may be introduced with the 
+above options.  Details can be found in `Profile' subsection in
+`Configuration File'.  You can force a particular profile to be
+chosen by using <option>-p</option> option followed by profile name.  This must be
+the first option present in the command line.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-p <replaceable>PROFILE</replaceable></arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Force a particular profile name <replaceable>PROFILE</replaceable>
+in the configuration file to be used.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+

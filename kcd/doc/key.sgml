@@ -1,0 +1,408 @@
+<sect1><title>Key Binding</title>
+
+<para>
+When kcd is first in full screen display, it stays in the
+<glossterm>navigation</glossterm> mode where you can use arrow keys to move the highlight bar
+around to any directory you want.  There is another mode called <glossterm>find</glossterm> mode
+which highlight bar is restricted to directories that match the string
+appearing at the bottom of the screen.  You can distinguish find mode by
+the string <computeroutput>Find:</computeroutput> displayed at the bottom of the screen.  The matching
+search string is displayed inside the brackets ([...]).
+</para>
+
+<para>
+Note that strings both before and after <computeroutput>-&gt;</computeroutput> of the symbolic links
+are searched in find mode.
+</para>
+
+<para>
+Displayed at the last row on screen is the full path name of
+highlighted directory.  Online help also utilizes this area.  You can
+switch between different displays by repeatly pressing <keycap>F9</keycap> key.
+</para>
+
+<para>
+By default, the key binding used is the one that has been used since
+kcd version 1.0.  It is based on <keycap>arrow keys</keycap>, <keycap>PageUp</keycap>, 
+<keycap>PageDown</keycap>, <keycap>Home</keycap>, <keycap>End</keycap> and
+<keycap>function keys</keycap>.  This is also referred to as 
+<glossterm>kcd key binding</glossterm>.  Beside this mode,
+<glossterm>Vi</glossterm> and <glossterm>Emacs key binding</glossterm> 
+are provided.  You may change the key binding
+via the <command>KeyBinding</command> configuration command.
+However, changing the action of
+individual keys is not available in the current version.
+</para>
+
+<sect2><title>kcd Key Binding</title>
+
+<para>
+Note that in kcd key binding mode, you can press 
+<keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo> follow by
+a number key from <keycap>0</keycap> to <keycap>9</keycap> to get the same
+results as the function keys.  This is handy for terminals without function key support.
+The number 1 to 9 correspond to <keycap>F1</keycap> to <keycap>F9</keycap> respectively.
+To emulate <keycap>F10</keycap>, use number 0.
+As an example, typing <keycombo><keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo><keycap>1</keycap></keycombo>
+(Press and hold <keycap>Ctrl</keycap> key, press and release <keycap>F</keycap>, release <keycap>Ctrl</keycap>, 
+then press and release <keycap>1</keycap>) is the same as <keycap>F1</keycap>.
+</para>
+
+<sect3><title>Navigation Mode</title>
+<variablelist>
+<varlistentry>
+<term><keycap>Arrow keys</keycap>, <keycap>Page up</keycap>, <keycap>Page down</keycap>, 
+<keycap>Home</keycap> and <keycap>End</keycap></term>
+<listitem><para>
+Move the highlight bar.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>Space bar</keycap> or <keycap>Enter</keycap></term>
+<listitem><para>
+Change to the highlighted directory and exit.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>F10</keycap> or <keycombo><keycap>Ctrl</keycap><keycap>C</keycap></keycombo></term>
+<listitem><para>
+Exit without changing directory.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>F8</keycap></term>
+<listitem><para>
+Repaint screen.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>F9</keycap> or <keycombo><keycap>Ctrl</keycap><keycap>R</keycap></keycombo></term>
+<listitem><para>
+Switch the status display between destination directory and key kelp.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>Center key</keycap> on numeric keypad</term>
+<listitem><para>
+Center highlight bar on the middle of the screen.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Characters from <keycap>a</keycap> to <keycap>z</keycap>, 
+from <keycap>A</keycap> to <keycap>Z</keycap> and from 
+<keycap>0</keycap> to <keycap>9</keycap></term>
+<listitem><para>
+Switch to find mode.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>,</keycap> and <keycap>.</keycap></term>
+<listitem><para>
+Panning screen left/right.  This works when the 
+directory tree is too wide to fit the screen.
+</para></listitem>
+</varlistentry>
+</variablelist>
+</sect3>
+
+<sect3><title>Find Mode</title>
+<variablelist>
+<varlistentry>
+<term>Any characters, <keycap>Ins</keycap>, <keycap>Del</keycap>, 
+<keycap>Backspace</keycap>, <keycap>left arrow</keycap>, 
+<keycap>right arrow</keycap></term>
+<listitem><para>
+Edit search string
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>Up arrow</keycap> or <keycap>Page up</keycap>, 
+<keycap>down arrow</keycap> or <keycap>Page down</keycap></term>
+<listitem><para>
+Go to the previous or next directory that match the
+search string
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>Backspace</keycap> or <keycap>Del</keycap> when the search 
+string is empty or <keycap>Tab</keycap></term>
+<listitem><para>
+Return to navigation mode
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>Space bar</keycap> or <keycap>Enter</keycap></term>
+<listitem><para>
+If the highlighted directory is a normal directory, change to that directory and exit.
+If the highlighted directory is a symbolic link, move highlight bar to the linked directory.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>F10</keycap> or <keycombo><keycap>Ctrl</keycap><keycap>C</keycap></keycombo></term>
+<listitem><para>
+Exit without changing directory.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>F8</keycap> or <keycombo><keycap>Ctrl</keycap><keycap>R</keycap></keycombo></term>
+<listitem><para>
+Repaint screen.
+</para></listitem>
+</varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2><title>Vi Key Binding</title>
+
+<para>
+In this configuration, key binding in navigation mode acts
+acts like cursor movement while find mode acts like text searching.
+All <keycap>arrow keys</keycap>, <keycap>PageUp</keycap>, <keycap>PageDown</keycap>, 
+<keycap>function keys</keycap>, and <keycap>Enter</keycap> retains the same
+meaning as kcd key binding.  Following is the list of keys
+available.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term><keycap>0</keycap>, <keycap>^</keycap></term>
+<listitem><para>
+First directory of line
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>$</keycap></term>
+<listitem><para>
+Last directory of line
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>h</keycap>, <keycap>b</keycap>, <keycap>B</keycap></term>
+<listitem><para>
+Previous directory
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>l</keycap>, <keycap>w</keycap>, <keycap>W</keycap></term>
+<listitem><para>
+Next directory
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>k</keycap>, <keycap>-</keycap></term>
+<listitem><para>
+Up
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>j</keycap>, <keycap>+</keycap>, <keycap>_</keycap></term>
+<listitem><para>
+Down
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>Ctrl</keycap><keycap>B</keycap></keycombo></term>
+<listitem><para>
+Previous page
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo></term>
+<listitem><para>
+Next page
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>Ctrl</keycap><keycap>U</keycap></keycombo>, 
+<keycombo><keycap>Ctrl</keycap><keycap>Y</keycap></keycombo></term>
+<listitem><para>
+Scroll up
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo>, 
+<keycombo><keycap>Ctrl</keycap><keycap>E</keycap></keycombo></term>
+<listitem><para>
+Scroll down
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo action=seq><keycap>g</keycap><keycap>g</keycap></keycombo></term>
+<listitem><para>
+First page
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>G</keycap></term>
+<listitem><para>
+Last page
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>/</keycap></term>
+<listitem><para>
+Search forward
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>?</keycap></term>
+<listitem><para>
+Search backward
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>Ctrl</keycap><keycap>L</keycap></keycombo></term>
+<listitem><para>
+Refresh screen
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycap>q</keycap>, 
+<keycombo action=seq><keycap>Z</keycap><keycap>Q</keycap></keycombo>, 
+<keycombo><keycap>Ctrl</keycap><keycap>C</keycap></keycombo></term>
+<listitem><para>
+Quit
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>
+For most commands, a number prefix to indicate
+the repeat count, such as <keycombo action=seq><keycap>5</keycap>
+<keycombo><keycap>Ctrl</keycap><keycap>B</keycap></keycombo></keycombo> 
+representing
+previous 5 pages, is supported.
+</para>
+</sect2>
+
+<sect2><title>Emacs Key Binding</title>
+
+<para>
+In this configuration, key binding in navigation mode acts
+acts like cursor movement while find mode acts like text searching.
+All <keycap>arrow keys</keycap>, <keycap>PageUp</keycap>, <keycap>PageDown</keycap>, 
+<keycap>function keys</keycap>, and <keycap>Enter</keycap> retains the same
+meaning as kcd key binding.  Following is the list of keys
+available.
+The notation used below is the one used in Emacs.  For example, 
+<keycombo><keycap>C</keycap><keycap>b</keycap></keycombo> 
+means <keycombo><keycap>Ctrl</keycap><keycap>B</keycap></keycombo> 
+while <keycombo><keycap>C</keycap><keycap>b</keycap></keycombo> 
+usually means <keycombo><keycap>Alt</keycap><keycap>B</keycap></keycombo>.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>a</keycap></keycombo></term>
+<listitem><para>
+First directory of line
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>e</keycap></keycombo></term>
+<listitem><para>
+Last directory of line
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>b</keycap></keycombo>, 
+<keycombo><keycap>M</keycap><keycap>b</keycap></keycombo></term>
+<listitem><para>
+Previous directory
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>f</keycap></keycombo>, 
+<keycombo><keycap>M</keycap><keycap>f</keycap></keycombo></term>
+<listitem><para>
+Next directory
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>p</keycap></keycombo></term>
+<listitem><para>
+Up
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>n</keycap></keycombo></term>
+<listitem><para>
+Down
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>M</keycap><keycap>v</keycap></keycombo></term>
+<listitem><para>
+Previous page
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>v</keycap></keycombo></term>
+<listitem><para>
+Next page
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>s</keycap></keycombo></term>
+<listitem><para>
+Search forward
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>r</keycap></keycombo></term>
+<listitem><para>
+Search backward
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><keycombo><keycap>C</keycap><keycap>c</keycap></keycombo></term>
+<listitem><para>
+Quit
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+</sect1>

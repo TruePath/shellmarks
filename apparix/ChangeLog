@@ -1,0 +1,266 @@
+
+
+Thu 3 March 2011
+
+   *  apparix-11-062 released.
+
+   *  The option -pick was added to support the new bash function 'whence'.
+
+
+Wed 26 Nov 2008
+
+   *  apparix-08-331 released.
+
+   *  The bash completion code was changed to improve tab completion on
+      subdirectories of the mark.  First, a bug was fixed where this completion
+      would include subdirectories of the current directory. Second,
+      patterns with no matching subdirectories will never generate an error
+      but simply stall completion, utilizing the bash nullglob option.
+
+   *  Fixed a bug in the string library - unlikely to affect apparix.
+
+
+Thu 24 Jul 2008
+
+   *  apparix-08-206 released.
+
+   *  The apparix function 'to' can now be used as a drop-in replacement
+      for cd.
+
+   *  Apparix and its wrappers have been expanded so that they act as
+      a replacement for cd in cases where the mark is not a bookmark but
+      exists as an accessible directory.  Bash tab completion acts by default
+      transparently and simultaneously on both bookmarks and accessible
+      directories.
+
+   *  Added options --try-current-first and --try-current-last.  These can be
+      used in the 'to' definition, instructing apparix to check whether the
+      mark is also the name of an accessible directory.  The definitions of
+      'to' as shipped with apparix do this, using --try-current-first.
+
+   *  Added option --tell-current. This will notify the user if an entry was
+      found as a regular directory rather than via bookmark lookup. Only
+      meaningful in conjunction with one of the options above.
+
+Tue 18 Sep 2007
+
+   *  apparix-07-261 released.
+
+   *  --squash-mark and --squash-dest have gone. They are now replaced
+      by -sm <mark> and -sd <mark>.  Squashing can no longer be applied
+      globally but must be targeted at a specific bookmark or its destination.
+      This is more in line with expected use. See further below.
+
+   *  apparix -sd MARK squashes all the *other* marks that point to the
+      destination bookmarked under MARK. Only MARK is kept for this
+      destination.
+
+   *  apparix -ld MARK lists all bookmarks MARK (noting that the same bookmark
+      is allowed to point to multiple locations) and additionally lists all
+      other bookmarks that share the destination with one of the MARK
+      bookmarks. This allows one to predict the effect of issuing 'apparix -sd
+      MARK'.
+
+   *  apparix -sm MARK squashes all the distinct destinations under the same
+      bookmark MARK.  By default the last destination is taken.
+
+   *  apparix -lm MARK lists all the distinct destinations under the same
+      bookmark MARK.
+
+   *  Apparix squash and purge options now output the dumped bookmarks
+      as command-line statements ready to reimport, rather than the format
+      used in the apparix rc file. A cut and paste will reinstate unwanted
+      removals. Set APPARIXPURGE to 1 to have dumped bookmarks in
+      the apparixrc file format.
+
+   *  The environment variable APPARIXTAG, if set, is incorporated
+      into the names of the apparix resource files. By default these are
+      .apparixrc and .apparixexpand. When APPARIXTAG is set to <tag>
+      they become .<tag>apparixrc and .<tag>apparixexpand.
+
+      This can be used e.g. to have different resource files on different
+      host machines.
+
+   *  If the environment APPARIXLOG is set its value is interpreted as a log
+      file that has all newly created jumps and portals appended to it.
+
+Wed 3 Jul 2007
+
+   *  apparix-07-184 released.
+
+   *  Apparix is now licensed under the GNU General Public License version 3.
+
+   *  Added --quiet-jump option. By default apparix will emit an error
+      message and set the exit status to 1 when looking up a mark and not
+      finding it. With this option, it is silent. It will still exit
+      with status 1.
+
+   *  For portal expansion apparix would exclude the destination 'CVS',
+      and this was hardcoded.  Exclusion behaviour is now specified using the
+      environment variable APPARIXEXCLUDE. This variable has the following
+      syntax:
+
+      <[:,][<string>]>+
+
+      That is, a list of names with each name preceded by a colon or a comma.
+      A colon indicates that <string> triggers exclusion of directory names
+      for which the trailing component is identical to <string>.
+      A comma indicates that <string> triggers exclusion of directory names
+      for which the trailing component contains <string> as a substring.
+      Example:
+            export APPARIXEXCLUDE=:CVS:lib,tmp
+      Curiosity:
+            export APPARIXEXCLUDE=,
+
+      will exclude everything from expansion, as it specifies the empty
+      string.
+
+Fri 10 Nov 2006
+
+   *  apparix-06-314 released.
+
+   *  Fixed Yet Another Bug that Boggles the Mind. In the last two releases
+      bookmarks could not be added at all, due to the addition of a status
+      check that triggers an erroneous status initialization.
+      This was a bad month.
+
+Wed  8 Nov 2006
+
+   *  apparix-06-312 released.
+
+   *  Fix dumb realloc-related apparix crash (n_old and n_new were in
+      the wrong order) that manifests itself with bookmark nr 100.
+
+Fri 20 Oct 2006
+
+   *  apparix-06-293 released.
+
+   *  Fix dumb apparix crash when .apparixrc is not present.
+      (This bug would occur only once as apparix created .apparixrc
+      before crashing).
+
+   *  Warn when commas are found in mark or target.
+
+Tue 23 May 2006
+
+   *  apparix-06-142 released.
+
+   *  --squash-mark was badly implemented and would generally not work. It now
+      works and preserves newer entries (those occurring later in the file
+      .apparixrc) over older entries by default. To change this behaviour use
+      -favour <mode>.
+
+   *  If a new bookmark already exists either as a regular bookmark or
+      as a portal destination apparix will emit a short message when the
+      bookmark is created.
+
+   *  Added -l option for paragraph listing of all available jumps.
+
+   *  Added -d option for dumping the resource file to STDOUT.
+
+   *  Added -u <num> option for undoing the last k bookmarks.
+
+   *  The -favour default in to() functions/macros is set to rOl, implying:
+         1) regular bookmarks are prefered over expansions
+         2) younger bookmarks are prefered over older bookmarks
+         3) paths with fewer components are prefered.
+      With this setting 3) is never reached as 2) will never be a tie.
+
+   *  Added alias -sm for -squash-mark
+
+   *  The -favour default with --squash-mark and -sm
+      is set to Olr implying that younger bookmarks will be preserved.
+
+   *  Squashing and purging currently only works on regular style bookmarks
+      due to finally specified semantics. Edit .apparixrc to do things
+      to portals. They are 'special' and quite likely you have only few.
+
+   *  The output format when simply listing bookmarks has slightly changed.
+      There are now three consecutive sections: portals, expansions,
+      bookmarks.
+
+   *  --add-portal uses the same getcwd/pwd code as --add-jump does
+      (rather than unconditionally using getcwd).
+
+   *  Changed -rid to -purge, -rid-mark to -purge-mark.
+
+Thu 5 Jan 2006
+
+   *  apparix-06-005 released.
+
+   *  Documentation changes. Added GETTING STARTED paragraph.
+
+Thu, 10 Nov 2005
+
+   *  apparix-05-314 released - major new features.
+
+   *  NOTE
+      It is necessary to update your functions or aliases; issue apparix
+      --shell-examples to find the up-to-date default versions.
+
+   *  Integrated bash completion code contributed by Sitaram Chamarty.
+      It is now possible to tab-complete on subdirectories of the directory
+      identified by a mark. Thus
+
+         to myfoo <TAB>
+
+      will give you a menu of or cycle through the subdirectories of
+      the myfoo target directory, depending on your completion settings.
+      It is also possible to do
+
+         to myfoo PAT<TAB>
+
+      This will only select those subdirectories that match the shell-pattern
+      PAT. As a reminder,
+
+         to <TAB>
+         to PAT<TAB>
+
+      do the same but then on apparix bookmarks.
+
+   *  The to() function/alias reads its input directly from apparix without
+      requiring an intermediate file. So .apparixresult is no longer created.
+
+   *  Fixed stupid copy-code bug in bash bm() and portal(). They would initiate
+      a jump.
+
+   *  The -quo / --quo options were dropped. Simply use apparix without
+      arguments to get the list of bookmarks.
+
+   *  added -favour <list> option to resolve duplicate bookmarks.
+      It is needed in the bash completion code.
+      Typical usage (in the wrapper functions): -favour lro
+         l  level (shorter paths prefered)
+         r  regular bookmarks prefered (not expansions)
+         o  older bookmarks prefered
+      LRO do the opposite.
+
+   *  Added --bu and -bu <fname> backup options.
+
+   *  Significant documentation updates.
+
+Wed, 2 Nov 2005
+
+   *  apparix-05-306 released.
+
+   *  apparix --add-jump without any arguments will take the trailing component
+      of the current directory as the bookmark, with the directory itself as
+      the destination.
+
+      With the shorthand alias/function bm that means simply entering
+         bm
+      does the trick.
+
+   *  The bash to() function was wrongly documented. It would not pass through
+      subdirectory specification. Now updated.
+
+   *  added -v option to show version information.
+
+   *  more documentation.
+
+Mon, 10 Oct 2005
+
+   *  apparix-05-283 released
+
+   *  initial release.
+

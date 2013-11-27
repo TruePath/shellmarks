@@ -1,0 +1,1274 @@
+.TH kcd 1 "kcd Reference Manual" "Version 7.15.0"
+.SH NAME
+kcd \- Directory Change Utility
+
+.SH SYNOPSIS
+.B kcd
+[-B] [DIR_SHORTCUT] [MATCH_NUMBER]
+.br
+
+.B kcd
+[\-b DIR_SHORTCUT] [\-ba [DIR [...]]] [\-br [DIR [...]]]
+[\-\-config] [\-\-configattr] [\-\-features] [\-h] [\-\-help]
+[\-M] [\-p PROFILE]
+[\-r] [\-rf] [\-rp DIR] [\-rq] [\-rQ]
+[\-t [DIR]] [\-tr [DIR]] [\-T]
+[\-v] [\-\-version]
+
+.B eval `kcdmain 
+[\-ia] [\-ic] [\-if] 
+[\-ias KCD_DIR] [\-ics KCD_DIR] [\-ifs KCD_DIR]
+.B `
+
+.SH DESCRIPTION
+
+kcd is a set of programs that help you navigate through directories
+easily.  
+kcd works by consulting the directory tree file 
+for the list of directories available.  
+By default the file is named 
+.I ~/.kcd.save.kcd.gz
+but may change according to the kcd configuration file.
+This file is automatically created when
+kcd is run for the first time.  
+
+.PP
+When you type the command without any parameter,
+it will display the saved entire directory tree and place the highlight bar 
+on the current directory.  You can use arrow keys, Page Up, Page Down, Home 
+and End keys to move the highlight bar to the desired directory.  Pressing 
+Enter will exit kcd and jump the the selected directory.  If you choose to 
+remain in the current directory, just press F10.
+
+.PP
+Besides using arrow keys, etc. to move the highlight bar,  you may
+type the some text string to limit the highlight bar to move between items
+containing the string.  The text string is shown at the bottom of the screen
+inside [...].  To restore highlight bar behavior,  press Tab key.
+
+.PP
+If you know the name of directory you want to change to,  you can type only 
+a part of directory name as
+.I DIR_SHORTCUT
+parameter.
+If kcd found from that there are more than 4 directories contain the 
+text,  it will list all matched 
+directories.  You can again use arrow keys, Page Up, Page Down, etc. to move
+the highlight bar and press Enter.
+If there are less than or equal 4 matched directory, kcd will pick a
+directory and jump.  Repeat the same kcd command will go to the next matched 
+one, and so on.   
+You may
+change the number of matched directory threshold to any value other than 4
+by modifying configuration file.  See the
+.B CONFIGURATION FILE
+section below.
+Optionally, you may specify
+.I MATCH_NUMBER
+so that the directory corresponding to the number in the matched list
+is used and kcd jump to that directory immediately.
+
+.PP
+The
+.I DIR_SHORTCUT
+may contain special symbols
+.I /
+and
+.I //
+to force the matching of parent directories as well.  For example
+
+.PP
+		kcd usr/bin
+
+.PP
+matches
+.I /usr/bin
+and
+.I /usr/sbin
+but not
+.I /usr/local/bin
+since the directory containing
+.I usr
+and
+.I bin
+must appeared right next to each other.  On the other hand
+
+.PP
+		kcd usr//bin
+
+.PP
+allows any number of directories between the
+.I usr
+and
+.I bin
+and also matches
+.I /usr/local/bin
+and
+\fI/usr/local/lib/mozilla/bin\fP.
+
+.SS OPTIONS
+
+.TP
+.I "\-b [DIR_SHORTCUT]"
+Display bookmarks matching DIR_SHORTCUT, or all bookmark if DIR_SHORTCUT is 
+not supplied.
+
+.TP
+.I "\-ba [DIR [...]]"
+Bookmark specified directories.  If none is specified,
+the current directory is used.
+
+.TP
+.I "\-br [DIR [...]]"
+Remove bookmark from specified directories.  If none is specified,
+the current directory is used.
+
+.TP
+.I "\-B"
+Search all directories, not just bookmarked ones.
+
+.TP
+.I "\-\-config"
+Display current configuration (excluding screen attributes) obtained from
+.I SYSCONFDIR/kcd.conf
+and
+.I ~/.kcd.conf.
+.I SYSCONFDIR
+is the directory given to --sysconfdir option during configure, which 
+usually is /etc, /usr/etc or /usr/local/etc.
+
+.TP
+.I "\-\-configattr"
+Display current screen attribute configuration.
+
+.TP
+.I "\-\-features"
+Display availability of all features:
+.RS
+.TP
+xterm/rxvt resize
+Yes if kcd can redraw itself if the size of xterm/rxvt terminal changes.
+.TP
+mouse support
+Yes if kcd can response to mouse click.
+.TP
+default scroll bar
+Yes if scroll bar will be used.  It can be overridden by 
+.B ScrollBar
+command in configuration file.
+.RE
+
+.TP
+.I "\-h, \-\-help"
+Display help message.
+
+.TP
+.I "\-\-helpinst"
+Display help for shell alias/function installation.
+
+.TP
+.I "\-M"
+Don't scan directories given by
+\fBMountDir\fP.
+
+.TP
+.I "\-p PROFILE"
+Use the specified configuration profile.  This must be the first
+option present in the command line.
+
+.TP
+.I "\-\-profiles"
+Display the list of configuration profiles available.
+
+.TP
+.I "\-r"
+Rescan directory tree using the default mode as 
+specified in configuration file.
+
+.TP
+.I "\-rf"
+Rescan directory using 
+.B full
+scan mode.  kcd will ignore all previously
+saved directory tree information and start scanning 
+from scratch.  By default, the 
+.B smart
+scan mode is 
+used whenever possible to reduce time needed for 
+directory scanning.   
+
+The full scan mode is provided in case you change 
+configuration files \- some command may not affect
+directory tree until you rescan in full mode.
+
+Another possible problem is that some old file system 
+may not have the change time (which is updated when 
+directory permission is changed) so that kcd cannot 
+correctly update the directory tree.  (msdos file 
+system is an example, but fortunately we cannot 
+change their directory permission anyway.)
+
+.TP
+.I "\-rp DIR"
+Rescan part of directory tree beginning at 
+.I DIR.
+
+.TP
+.I "\-rq"
+Rescan directory tree using the quiet mode,
+overriding default mode.  No current progress is 
+displayed.
+
+.TP
+.I "\-rQ"
+Rescan directory tree using the verbose mode
+(opposite of 
+.B \-rq
+), overriding default mode.  
+Current checked directory is displayed.
+
+.TP
+.I "\-t [DIR]"
+Display partial directory tree beginning with DIR.
+If DIR is not specified, the current directory is
+used.
+
+.TP
+.I "\-tr [DIR]"
+Like
+.B \-t
+but rescan directory tree before display.
+
+.TP
+.I "\-T"
+Display full directory tree.
+
+.TP
+.I "\-v, \-\-version"
+Display version number.
+
+.PP
+Rescan options can be combined, i.e., `kcd -rf -rq' is the same as `kcd -rfq'.
+
+.PP
+Following parameters are useful when you type `kcd' and get a 
+command not found error.   `kcd' is actually a shell function or 
+shell alias so it must be setup before you can type any kcd command.  
+You will have to use `kcdmain' as the command name (since kcd 
+command is not available yet).
+
+.TP
+.I "\-ia"
+Install shell alias when kcd is installed in 
+\fI/usr/bin\fP.
+
+.TP
+.I "\-ic"
+Install shell alias for csh or tcsh when kcd is installed in 
+\fI/usr/bin\fP.
+
+.TP
+.I "\-if"
+Install shell function when kcd is installed in 
+.I /usr/bin.
+
+.TP
+.I "\-ias KCD_DIR"
+Install shell alias when kcd is installed in the specified directory
+.I KCD_DIR.
+
+.TP
+.I "\-ics KCD_DIR"
+Install shell alias for csh or tcsh when kcd is installed in the 
+specified directory
+.I KCD_DIR.
+
+.TP
+.I "\-ifs KCD_DIR"
+Install shell function when kcd is installed in the specified directory
+.I KCD_DIR.
+
+.SH DIRECTORY TREE WINDOW
+
+The directory tree window appears when you type kcd without any
+other parameter.   Initially kcd is in the 
+.B navigation
+mode.  You can use 
+arrow keys to move the highlight bar to any directory you want.  There is 
+another mode called 
+.B find
+mode which can be distinguish from navigation
+mode by the string ` Find: ' displayed at the bottom of the screen.  Pressing 
+arrow keys will move the highlight bar to the nearest directory containing the
+search string inside the brackets ([...]).   Displayed at the last row on 
+screen is the full path name of highlighted directory.
+
+
+.SS KEYS IN NAVIGATION MODE
+
+.TP
+.I Arrow keys, Page up, Page down, Home and End
+Move the highlight bar.
+
+.TP
+.I Space bar or Enter
+Change to the highlighted directory and exit.
+
+.TP
+.I F10 or ^C (Ctrl-C)
+Exit without changing directory.
+
+.TP
+.I F8
+Repaint screen.
+
+.TP
+.I F9
+Switch between status display: Destination directory <--> Key help.
+
+.TP
+.I Center key on numeric keypad
+Center highlight bar on the middle of the screen.
+
+.TP
+.I Characters from `a' to `z', from `A' to `Z' and from `0' to `9'
+Switch to find mode.
+
+.TP
+.I `,' and `.'
+Panning screen left/right.  This works when the 
+directory tree is too wide to fit the screen.
+
+
+.SS KEYS IN FIND MODE
+
+.TP
+.I Any characters, Ins, Del, Backspace, left arrow, right arrow
+Edit search string
+
+.TP
+.I Up arrow or Page up, down arrow or Page down
+Go to the previous or next directory that match the search string
+
+.TP
+.I Backspace or Del when the search string is empty or Tab
+Return to navigation mode
+
+.TP
+.I Space bar or Enter
+Change to the highlighted directory and exit.
+
+.TP
+.I F10 or ^C (Ctrl-C)
+Exit without changing directory.
+
+.TP
+.I F8
+Repaint screen.
+
+.PP
+For terminals without function keys, you can press ^F+num where 
+num is from 0 to 9 to get the same result.  ^F+1 (Press and hold `Ctrl' key, 
+press and release `F', release `Ctrl', then press `1') is the same as F1.
+Similarly ^F+2 to ^F+9 correspond to F2 to F9 respectively.  To emulate F10, 
+use ^F+0.
+
+.SS DIRECTORY LEGENDS
+
+.PP
+All accessible directories (except links) are shown as green (color 
+console) or underlined (B&W console) and can be selected.
+
+
+.PP
+.I /dev 
+and 
+.I /proc 
+plus other directories specified in 
+.B SkipDir
+setting 
+are shown with 
+.B [skipped].
+Subdirectories inside skipped directories are not displayed but 
+you may able to access them using shell's 
+.B cd
+command.
+
+.PP
+Directories with 
+.B [*] 
+means that it is not present in the saved file.
+They are added automatically to the screen when current directory is not in
+the file.  The changes are not written to the file.  So you have to rescan
+directory if you do not intend to skip them.
+
+.PP
+Directories without execute permission are shown with 
+.B [unreadable].
+You cannot change to this directory.
+
+.PP
+Directories without read permission but with execute permission are
+also shown with 
+.B [unreadable]
+.  You can change to this directory, however,
+you cannot read the content of the directory (using the 
+.B ls
+command).
+
+.PP
+Symbolic links are shown with 
+.B -> 
+and the destination directory.  
+Selecting a symbolic link will jump to its destination directory while still
+staying in kcd.  You can navigate further or just press 
+.B Enter 
+to jump there.
+Some symbolic links may point to a directory outside the saved directory
+tree given in the 
+.B StartDir 
+configuration command.  These are displayed
+with 
+.B [outside tree]
+.  Pressing 
+.I Enter 
+will jump there immediately.
+
+.SS ALTERNATE KEY BINDING
+
+.PP
+You may change the keys used in kcd via 
+.B KeyBinding
+configuration commands.  Besides the default or kcd mode, Vi and Emacs modes are
+available.  The following is the summary of keys available in these two
+modes.  All arrow key, PageUp, PageDown, function keys retains the same
+meaning as the default key binding.
+
+.SS Vi Mode
+
+.TP
+.I 0, ^
+First directory of line
+
+.TP
+.I $
+Last directory of line
+
+.TP
+.I h, b, B
+Previous directory
+
+.TP
+.I l, w, W
+Next directory
+
+.TP
+.I k, -
+Up
+
+.TP
+.I j, +, _
+Down
+
+.TP
+.I ^B
+Previous page
+
+.TP
+.I ^F
+Next page
+
+.TP
+.I ^U, ^Y
+Scroll up
+
+.TP
+.I ^D, ^E
+Scroll down
+
+.TP
+.I gg
+First page
+
+.TP
+.I G
+Last page
+
+.TP
+.I /
+Search forward
+
+.TP
+.I ?
+Search backward
+
+.TP
+.I ^L
+Refresh screen
+
+.TP
+.I q, ZQ, ^C
+Quit
+
+.PP
+For most commands, a number prefix to indicate
+the repeat count, such as 
+.I 5^B
+representing previous 5 pages, is supported.
+
+.SS Emacs mode
+
+.TP
+.I C-a
+First directory of line
+
+.TP
+.I C-e
+Last directory of line
+
+.TP
+.I C-b, M-b
+Previous directory
+
+.TP
+.I C-f, M-f
+Next directory
+
+.TP
+.I C-p
+Up
+
+.TP
+.I C-n
+Down
+
+.TP
+.I M-v
+Previous page
+
+.TP
+.I C-v
+Next page
+
+.TP
+.I C-s
+Search forward
+
+.TP
+.I C-r
+Search backward
+
+.TP
+.I C-c
+Quit
+
+
+.SH CONFIGURATION FILE
+
+kcd consults settings in 
+.I /etc/kcd.conf,
+.I /usr/etc/kcd.conf,
+.I /usr/local/etc/kcd.conf
+and 
+.I ~/.kcd.conf,
+(in that order), each time 
+the program executes if available.   
+Commands in the latter configuration
+file will usually override the former one.
+However, you have to use the 
+.B ClearStartDir
+and 
+.B ClearSkipDir 
+commands in 
+.I ~/.kcd.conf,
+for example,
+if you want to undo 
+.B StartDir
+and 
+.B SkipDir
+commands in 
+.I /etc/kcd.conf.
+
+.PP
+The syntax of each command is
+
+		command_name = value
+
+.PP
+All command names are case-insensitive.
+Values, however, depends on
+whether the command requests a double quoted value or not.  Only values NOT in
+double quotes are treated as case-insensitive.
+
+.PP
+There are 2 possible ways to specify value for double quoted string: 
+glob, and regular expression.
+
+.PP
+Glob uses characters like `?' and `*' as wildcards.  It is placed 
+within a pair of double quotes like "/usr/lib/lib*".
+
+.PP
+Regular expression uses extended regular expression format and is 
+placed within double quotes prefixed by either `R' or `r' such as
+r"/usr/lib/lib[a-z]-.*".  kcd automatically adds a `^' and `$' at the
+beginning and the end of string, respectively.
+
+.PP
+The symbol `#' serves as comment and all characters starting from `#'
+till end of line are ignored.   The `#' inside double quotes, however, will
+be treated as part of value passed to the command.
+
+.SS COMMAND SUMMARY
+.TP
+.I SkipDir	(allowed value = "directory"/r"directory", optional GlobDot and GlobPath override allowed)
+This tell kcd to skip scanning for directories 
+inside the specified directory name.   Multiple
+.B SkipDir 
+commands are allowed.  
+.I /dev 
+and 
+.I /proc 
+are automatically excluded from the list of 
+directories to be scanned.  Directory name
+must be inside a pair of double quote ("...").
+
+You may override the current 
+.B GlobDot 
+and
+.B GlobPath 
+settings for this 
+.B SkipDir 
+command.
+Just specify each setting separated by comma
+after the directory name.
+
+Example:	SkipDir = "/cdrom"
+.br
+		SkipDir = "~/*rc", GlobDot=yes
+
+.TP
+.I StartDir	(allowed value = "directory")
+This tell kcd to start scanning from the
+specified directories.   Multiple 
+.B StartDir 
+commands are allowed.  In that case, kcd
+will generate output containing multiple
+directory trees.   Directory name must be 
+inside a pair of double quote ("...").
+If no 
+.B StartDir 
+is specified,  kcd starts
+scanning from the root directory.
+Wild cards are not supported by 
+\fBStartDir\fP.
+
+Example:	StartDir = "~"
+
+.TP
+.I MountDir	(allowed value = "directory", with optional actions All/Tree/Skip)
+This tell kcd to handle the specified
+directory according to the action given:
+
+.B All
+Always scan regardless if search string is provided in the command line.
+
+.B Tree
+Scan only when search string is not supplied.
+
+.B Skip
+Always skip scanning.
+
+If the action is not provided, the default
+.B Skip
+action is used.
+
+Multiple actions, separated by commas can
+be specified.  However this is intended for
+features to be introduced later.
+
+Wild cards are not supported by 
+\fBMountDir\fP.
+
+Example:	MountDir = "/mnt/floppy", Skip
+.br
+		MountDir = "/mnt/usb", All
+
+Note: Directories given by 
+\fBMountDir\fP
+should
+not overlap.  The following does not work
+
+		MountDir = "/mnt/mount_c", All
+.br
+		MountDir = "/mnt/mount_c/temp", Skip
+
+Use the following instead
+
+		MountDir = "/mnt/mount_c", All
+.br
+		SkipDir = "/mnt/mount_c/temp"
+
+
+.TP
+.I QuietFullScan	(allowed value = yes/no, default value = no)
+This command toggle progress report when
+kcd scan for directories using full scan
+mode.  Only the last 
+.B QuietFullScan 
+command 
+are effective.  This option can be overridden 
+by 
+.B \-rq
+or 
+.B \-rQ.
+
+Example:	QuietFullScan = yes
+
+.TP
+.I QuietSmartScan	(allowed value = yes/no, default value = no)
+This command is similar to 
+.B QuietFullScan 
+but
+is intended for smart scan mode.  This 
+option can be overridden by `\-rq' or `\-rQ'.
+
+.TP
+.I QuietPartialScan	(allowed value = yes/no, default value = no)
+This command is similar to 
+.B QuietFullScan 
+but
+is intended for `-rp' option.  This 
+option can be overridden by `\-rq' or `\-rQ'.
+
+.TP
+.I SortTree	(allowed value = yes/no, default value = yes)
+This command cause kcd to sort the directory 
+tree.  If you change the 
+.B SortTree 
+value from
+yes to no,  directory tree must be rescanned 
+using full scan mode to make this command to 
+properly restore the original order.
+
+.TP
+.I GraphicChar	(allowed value = yes/no, default value = yes)
+Choose whether special line graphic and 
+arrow characters are used.  If `no' is 
+given, simple characters such as `+', `|', 
+`>', etc. is used instead.
+
+.TP
+.I ScrollBar	(allowed value = yes/no, default value = yes for ncurses version >= 4.2)
+Choose whether scroll bars will be displayed.
+
+.TP
+.I MouseScrollRate	(allowed value: any number >= 0, default value = 2)
+Select scrolling rate when mouse button is held down.  
+Unit is in 0.1 sec.
+Set to 0 disable this feature.
+
+.TP
+.I CaseSensitiveSort	(allowed value = yes/no, default value = no)
+Choose between case-sensitive or
+case-insensitive sort.  
+.B SortTree 
+must be set to yes in order for this to be effective.
+
+.TP
+.I ClearSkipDir	(allowed value = all/"directory"/r"directory")
+Do not skip the specified directory previously set as 
+.B SkipDir.
+If `all' is used, 
+.I ClearSkipDir 
+discards all directory.  
+.I /dev
+and 
+.I /proc 
+are not
+affected by this command.
+
+Example:	ClearSkipDir = all
+.br
+		ClearSkipDir = "/dosc"
+
+.TP
+.I ClearStartDir	(allowed value = all/"directory"/r"directory")
+Do not use the specified directory previously set as
+.B StartDir.
+If `all' is used, 
+.B ClearStartDir 
+discards all 
+.B StartDir 
+directory.
+
+.TP
+.I ClearMountDir	(allowed value = all/"directory"/r"directory")
+Do not use the specified directory previously set as
+.B MountDir.
+If `all' is used, 
+.B ClearMountDir 
+discards all 
+.B MountDir 
+directory.
+
+.TP
+.I SpaceSelect	(allowed value = yes/no, default value = yes)
+Setting this to no, when in find mode,
+pressing spacebar will not select the
+highlighted directory but proceed looking
+for the directory containing the space.
+
+.TP
+.I ShowListThreshold	(allowed value: any numbers >= 0, default value = 4)
+If the number of matched directories given
+in the command line is less than or equal 
+this number, kcd will jump immediately.  
+Otherwise, the list of all matches are
+shown.
+
+.TP
+.I ShowNewDir	(allowed value = yes/no/multi, default value = multi
+Choose whether the new directory will be
+displayed when kcd decides to jump without
+showing list of matches.  `Multi' means
+display only when there are multiple matches.
+
+.TP
+.I FuzzySize	(allowed value: any numbers >= 0, default value = 10)
+If there is no matched directories given
+in the command line, kcd will search for
+directories that provide the closest match.
+The number of matches is given by this
+configuration.
+
+.TP
+.I GlobDot	(allowed value = yes/no, default value = no)
+Select whether wildcard can match the
+leading `.' in the path name.
+It effects only commands following it.
+
+.TP
+.I GlobPath	(allowed value = yes/no, default value = no)
+Select whether wildcard can match the `/'
+in the path name.
+It effects only commands following it.
+
+.TP
+.I DefaultBackground	(allowed value = Black/Red/Green/Yellow/Blue/Magenta/Cyan/White, default value = Black)
+Select background color for the 
+directory tree window.
+
+.TP
+.I DefaultTree	(allowed value = quoted string)
+This specifies the default subtree displayed
+in directory tree mode.  It can be overriden
+by `\-t' or `\-T' options.
+
+
+.TP
+.I KeyBinding	(allowed value = default/kcd/vi/emacs, default value = default)
+Select a particular key binding.
+
+
+.SS SCREEN ATTRIBUTE COMMAND SUMMARY
+.PP
+Screen attribute command for color display has the following syntax:
+
+	<ITEM>ColorAttr = [normal | <ATTR> ...] <FG_COLOR> on <BG_COLOR>
+
+while for black and white display is:
+
+	<ITEM>BWAttr = [normal | <ATTR>]
+.PP
+Available values for <ITEM>:
+.TP
+.I Normal
+Majority of main window area, 
+including line drawing characters,
+inaccessible directories,
+[*], [skipped] and [unreadable].
+
+.TP
+.I Dir
+Directory names.
+
+.TP
+.I HighlightDir
+Highlighted directory names.
+
+.TP
+.I SymLink
+Symbolic links.
+
+.TP
+.I HighlightSymLink
+Highlighted symbolic links.
+
+.TP
+.I Title
+Program name, text entered in find mode.
+
+.TP
+.I Status
+Status bar.
+
+.TP
+.I More
+Small area on rightmost column of
+display area that `+' is displayed
+when window content is too wide to 
+fit on the screen.
+
+.TP
+.I ScrollArrow
+Arrows on the scroll bars.
+
+.TP
+.I ScrollBlock
+The moving block on the scroll bars.
+
+.TP
+.I ScrollBar
+Background of the scroll bars.
+
+.PP
+Available values for <ATTR>:
+.br
+	Standout   Underline   Reverse   Blink   Dim   Bold
+
+.PP
+Available values for <FG_COLOR> and <BG_COLOR>:
+.br
+	Black   Red   Green   Yellow
+.br
+	Blue   Magenta   Cyan   White
+
+.PP
+<BG_COLOR> can also be 
+.I Default
+which means that the background 
+color of the directory tree window is used here.
+
+.PP
+Example:	# Change both foreground and background
+.br
+		NormalColorAttr = cyan on black
+.br
+		DirColorAttr = bold red on blue
+.br
+		SymLinkColorAttr = blue on white
+.br		
+		# Change only foreground
+.br
+		NormalColorAttr = cyan on default
+.br
+		# For black and white display
+.br
+		NormalBWAttr = normal
+.br
+		DirBWAttr = underline
+.br
+		TitleBWAttr = bold reverse
+
+.PP
+Note:
+Whether a particular combination of attributes and/or colors
+works is terminal dependent.
+
+
+.SS QUOTING RULES
+
+The following symbols have special meanings inside double
+quotes values (such as in 
+.B SkipDir 
+command):
+
+.PP
+		\\  '  "  `  ~
+
+.PP
+and
+
+.PP
+		*  ?  [  ]
+
+.PP
+for glob, or
+
+.PP
+		^  .  [  ]  $  (  )  |  *  +  ?  {  }
+
+.PP
+for regular expression.  
+Currently the commands 
+.B SkipDir, 
+.B ClearSkipDir, 
+.B ClearStartDir, 
+.B ClearMountDir 
+can 
+accept glob or regular expression.
+
+.PP
+`~' and `~username', where username is an account name, 
+are properly expanded to home directory when it appears at the
+beginning of the string.
+The special symbols
+``' and `'' are reserved for 
+future use.
+
+.PP
+Control characters can be entered using \\xHH
+quoting where
+.B HH
+is the hexadecimal value of the character.
+
+
+.SS GLOB SPECIAL CHARACTERS
+Shell wildcards normally does not match `/' and the leading 
+`.' but the behavior can be overridden using 
+.B GlobPath 
+and 
+.B GlobDot
+commands respectively.  Here is the list of wildcard pattern that
+kcd recognizes:
+
+.TP
+.I *
+Match any characters
+
+.TP
+.I ?
+Match single character
+
+.TP
+.I [set]
+Match single character in the set
+Example: "lib[cm]" matches libc and libm.
+
+.TP
+.I [!set]
+Match single character not in the set
+Example: "lib[!m]" matches libc but not libm.
+
+.TP
+.I [^set]
+Same as [!set] but only available if in some
+cases.  If glibc is your C library (true on
+Linux), it works when the environment
+variable POSIXLY_CORRECT is not set.
+
+.TP
+.I [from-to]
+Match single character within the range
+Example: "x[a-m]m" matches xbm but not xpm.
+
+.TP
+.I [:class:]
+Match single character in the class where
+class can be one of
+alpha	upper	lower	digit	alnum
+xdigit	space	print	punct	graph
+cntrl	blank
+
+.PP
+Example:
+.br
+		SkipDir = "~/.*"
+.br
+		SkipDir = "~/*/CVS"
+
+.PP
+Note that the matching rules depends on the C library in 
+your system.  The above rules apply when you have POSIX.2 conforming 
+library.  System with older libraries may not accept some of the 
+rules.
+
+.PP
+If you want these symbols inside double quotes to actually
+refer to the characters.  You have to add an extra `\\' in front of 
+them.  Note that here, `*'band `?' refer to characters inside 
+directory name,  not wildcards.
+
+.PP
+For example:
+
+.PP
+		SkipDir = "~/\\`Cool\\?\\'"
+
+.PP
+is used to skip the directory named
+
+.PP
+		`Cool?'
+.PP
+(the enclosing quotes and the 
+question mark are parts
+of the directory name)
+inside your home directory.  (You may not know that can created this
+kind of weird directory name!)
+
+
+.SS REGULAR EXPRESSION SPECIAL CHARACTERS
+For information check Section 7 of `regex' man pages, i.e.,
+type `man 7 regex' in command line.
+
+
+.SS SAMPLE CONFIGURATION FILE
+Following is for directory tree starting from root directory:
+
+# Sample configuration file for kcd
+.br
+SkipDir = "/cdrom"	# Ignore cdrom mounting point
+.br
+SkipDir = "/dosc"	# MSDOS C: partition
+.br
+
+Following is for directory tree starting from home directory:
+
+# Another sample configuration file for kcd
+.br
+StartDir = "~"		# Start from home directory
+.br
+SkipDir = "~/.terminfo"	# No scan inside .terminfo
+.br
+QuietFullScan = yes
+.br
+QuietSmartScan = yes
+.br
+
+.SS PROFILES
+This feature allows kcd to behave differently depending on
+the invoked profile name.  The following is an example of
+configuration file containing multiple profiles.
+
+[kcd]
+.br
+StartDir = "/"
+.br
+[hcd]
+.br
+StartDir = "~"
+.br
+
+.PP
+With the example above, two shell functions/aliases are
+introduced, `kcd' and `hcd'.  If you type `kcd' in the command line,
+the entire system is searched and displayed.  But if you want to
+restrict to only inside home directory, you can use `hcd' command
+instead.  More profiles can be introduced using in similar manner.
+There is no limit on the number of profiles.  The only restriction
+is the name of the profile.  The profile name must be a valid C or
+C++ identifier, i.e., contains only alphanumeric characters or
+underscore and must not begin with a number.
+
+.PP
+There are two special profiles, `*' and `kcd'.  The `*'
+profile is the default profile and is used for commands when no
+profile name is specified.  The `kcd' profile is always created
+regardless if it actually appears in the configuration file.
+An ordinary profile (including `kcd'), when declared, will be
+initialized from the current configuration of `*'.  Afterward,
+any changes to `*' does not affect the previously initialized one.
+Here is an example.
+
+ShowListThreshold = 3	# No profile specified yet,
+.br
+				# store in [*]
+.br
+[kcd]			# Copy configuration from [*]
+.br
+				# So the ShowListThreshold
+.br
+				# command also applies to [kcd]
+.br
+StartDir = "/"
+.br
+[*]
+.br
+SkipDir = "~/.*"	# Add SkipDir command to [*]
+.br
+				# Does not affect [kcd]
+.br
+[hcd]			# Inherit ShowListThreshold
+.br
+				# and SkipDir from [*]
+.br
+StartDir = "~"
+.br
+[ucd]			# Inherit ShowListThreshold
+.br
+				# and SkipDir from [*]
+.br
+StartDir = "/home"
+.br
+
+.PP
+Note: Profile may not work on some shells such as ash.
+bash and tcsh work fine.
+
+.SH COMMON ERROR MESSAGES
+.SS Shell message reporting that it cannot find a particular file or \
+directory (the actual message depends on the shell used).
+.br
+For example, bash displays `bash: \fIdirname\fP: No such file or directory'
+.TP
+Cause:
+kcd attempts to change to a directory that no longer
+exists.
+.TP
+Solution:
+Rescan directory.
+
+.SS `kcd: cannot find a link containing the string ...'
+.TP
+Cause:
+kcd cannot find any directory matching specified
+string given in the command line.  This may due to:
+
+.RS
+.PD 0
+1. There may be some typos in directory name
+given.
+.PP
+Solution: Retype the correct name.
+
+.PP
+2. The desired directory is created after the last
+directory scan.
+.PP
+Solution: Rescan directory.
+
+.PP
+3. kcd has been configured to skip it.
+.PP
+Solution: Change directory manually by the `cd' command or
+modify the configuration file (See the previous
+section).
+
+.PD
+.RE
+
+.SS `kcd: your ncurses library is bad.  Refer to kcd README file for solution'
+.TP
+Cause:
+.PP
+1. ncurses library (\fIlibncurses.a\fP or \fIlibncurses.so.X.X.X\fP)
+in \fI/usr/lib\fP) and header file (\fI/usr/include/curses.h\fP) do not match.
+.PP
+2. The library is built based using a different 
+configuration, compiler or library
+that is incompatible with the current installed ones.
+.PP
+3. The library is built not to support C++ applications.
+
+.TP
+Solution:
+Recompile kcd.
+
+.SH AUTHOR
+kcd is copyrighted (c) 1996,1997-9,2000-4,2005 by Kriang Lerdsuwanakij
+<lerdsuwa@users.sourceforge.net>.  For bug report, visit
+the program home page is at 
+.br
+.B http://kcd.sourceforge.net

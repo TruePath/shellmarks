@@ -1,0 +1,65 @@
+# Makefile for KCD
+# Copyright (c) 1997,1998,1999,2000,2002,2004,2007 Kriang Lerdsuwanakij
+# email:	lerdsuwa@users.sourceforge.net
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+
+PACKAGE		= @PACKAGE@
+VERSION		= @VERSION@
+
+SHELL		= /bin/sh
+@SET_MAKE@
+
+datarootdir	= @datarootdir@
+srcdir		= @srcdir@
+VPATH		= @srcdir@
+top_srcdir	= @top_srcdir@
+top_builddir	= @top_builddir@
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+bindir		= @bindir@
+libdir		= @libdir@
+includedir	= @includedir@
+mandir		= @mandir@
+man1dir		= $(mandir)/man1
+docdir		= @docdir@
+etcdir		= @sysconfdir@
+etcdir2		= @prefix@/etc
+localedir	= @datadir@/locale
+
+# DESTDIR used in rules below is undefined by default.
+# It will be defined when building package.
+
+CC		= @CC@
+CXX		= @CXX@
+CPP		= @CPP@
+CXXCPP		= @CXXCPP@
+
+CFLAGS		= @CFLAGS@
+CXXFLAGS	= @CXXFLAGS@
+CPPFLAGS	= @CPPFLAGS@
+
+CCFLAGS		= $(CPPFLAGS) $(CFLAGS)
+CXXCFLAGS	= $(CPPFLAGS) $(CXXFLAGS)
+
+LDFLAGS		= @LDFLAGS@
+LIBS		= @LIBINTL@ @LIBS@
+
+INSTALL		= @INSTALL@
+INSTALL_PROGRAM	= @INSTALL_PROGRAM@
+INSTALL_DATA	= @INSTALL_DATA@
+

@@ -1,0 +1,50 @@
+#! /usr/bin/env perl
+# rpcp - replace text while copy file
+# Copyright (c) 2000 Kriang Lerdsuwanakij
+# email:	lerdsuwa@users.sourceforge.net
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+$prog_name = "rpcp";
+$prog_ver = "2.0.0";
+
+if (@ARGV != 3) {
+	print "$prog_name $prog_ver\n";
+	print "usage $prog_name RPCP INFILE OUTFILE\n";
+	exit 0;
+}
+
+@key = ();
+@replace = ();
+
+open INFILE, $ARGV[0] or die "$prog_name: cannot open $ARGV[0] for reading\n";
+while (<INFILE>) {
+	@list = split ' ', $_;
+	push @key, $list[0];
+	shift @list;
+	push @replace, join ' ',@list;;
+}
+close INFILE;
+
+open INFILE, $ARGV[1] or die "$prog_name: cannot open $ARGV[0] for reading\n";
+open OUTFILE, ">$ARGV[2]" or die "$prog_name: cannot open $ARGV[0] for writing\n";
+while (<INFILE>) {
+	for $i (0 .. scalar(@key)-1) {
+		s/$key[$i]/$replace[$i]/g;
+	}
+	print OUTFILE $_;
+}
+close INFILE;
+close OUTFILE;

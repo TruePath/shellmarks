@@ -1,0 +1,63 @@
+#!/bin/sh
+# makepkg
+# Copyright (c) 2000, 2003, 2004, 2009 Kriang Lerdsuwanakij
+# email:	lerdsuwa@users.sourceforge.net
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+. scripts/version
+LANG=en_US.UTF-8; export LANG
+BUILD_DIR="/tmp/kcd-build-$USER"; export BUILD_DIR
+BASE_NAME=kcd-pre$VER; export BASE_NAME
+TREE_DIR=$BUILD_DIR/$BASE_NAME; export TREE_DIR
+RPCP_FILE=$BUILD_DIR/rpcp.replace; export RPCP_FILE
+RPCP_LSM_FILE=$BUILD_DIR/rpcp.replacelsm; export RPCP_LSM_FILE
+
+PKGS_DIR=../pkgs; export PKGS_DIR
+FROM_MAKEPKG=makepkg; export FROM_MAKEPKG
+
+scripts/dircheck || exit 0
+
+# Create i18n files
+make default-po
+
+# Regenerate HTML files
+make html
+
+# Prepare directories
+rm -rf $BUILD_DIR || exit 0
+mkdir -p $BUILD_DIR
+mkdir -p $TREE_DIR
+
+# Location for final .tar.gz and other files
+if test ! -e $PKGS_DIR; then
+	mkdir -p $PKGS_DIR
+fi
+
+echo "%VERSION% pre$VER" > $RPCP_FILE
+echo "%RELDATE% `date +"%b %_d, %Y"`" >> $RPCP_FILE
+echo "%RELMONTH% `date +"%-m"`" >> $RPCP_FILE
+echo "%RELDAY% `date +"%-d"`" >> $RPCP_FILE
+echo "%RELYEAR% `date +"%Y"`" >> $RPCP_FILE
+echo "!VERSION! pre$VER" >> $RPCP_FILE
+echo "!RELDATE! `date +"%b %_d, %Y"`" >> $RPCP_FILE
+echo "%LSMDATE% `date +"%d%b%y"`" | tr a-z A-Z >> $RPCP_FILE
+echo "//#define #define" >> $RPCP_FILE
+
+# Make package
+scripts/makepkg-real
+
+# Cleanup
+rm -rf $BUILD_DIR

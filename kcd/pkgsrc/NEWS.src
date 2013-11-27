@@ -1,0 +1,1224 @@
+NEWS: Summary of changes in kcd
+===============================
+
+Changes in Version %VERSION% from 7.14.0
+(%RELDATE%)
+
+	- Remove --enable-debug-memory from configure script.
+	- Remove configure check and support for very old C++ compilers.
+	- Fix compilation with recent GCC versions.
+	- Fix ncurses header location in recent Linux distributions.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.14.0 from 7.13.1
+(Dec 5, 2007)
+
+        - New stable release from 7.13.1 branch.  No other changes.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.13.1 from 7.13.0
+(Oct 13, 2007)
+
+	- Fix various configure problems and compilation warnings.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.13.0 from 7.11.0
+(Jun 16, 2007)
+
+	- Fix compilation problem with later GCC 4.0.x, 4.1.
+	  (With some changes from Andreas Bernauer.)
+
+	- New configuration commands: MountDir and ClearMountDir.
+	  The `MountDir' command supports directory scanning when kcd
+	  is invoked.  This is suitable for removable drive mounting
+	  points.
+
+	  Ex: MountDir = "/mnt/cdrom", All
+
+	  The above command treat `/mnt/cdrom' as a mounted directory.
+	  `All' is the action taken for this directory.  Scanning
+	  for subdirectories inside `/mnt/cdrom' is always performed
+	  regardless whether you specify the search string in the command
+	  line or not.
+
+	  Other action supported:	Tree		Scan only when
+							search string is
+							not supplied.
+					Skip		Skip scanning.
+
+	- New configuration command: ShowNewDir
+	  The `ShowNewDir' controls whether the new directory kcd changed to
+	  is displayed on the screen.  Possible values: Yes, No, Multi
+	  (means only displayed when multiple matches exist).  The default
+	  behavior is Multi.
+
+	  Example: with the default behavior for the "kcd sbin" is not
+	  displaying the destination directory if only one directory matches
+	  the string "sbin".  Setting `ShowNewDir' to `Yes' always displays 
+	  the destination directory.
+
+	- Symbolic links in SkipDir and MountDir are handled correctly.
+
+	- Directories containing `..', such as those found in configuration
+	  commands, are not reduced since it could produce error when
+	  symlink is present in the path.
+
+	- New `-M' option to disable MountDir scanning.
+
+	- `-t' and `-tr' support relative path.
+
+	- Correct error message produced by `-t' and `-tr' when cannot find
+	  specified directory.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.11.0 from 7.9.0
+(Jan 1, 2005)
+
+	- New command line search mode via `/' and `//' special symbols:
+	  Ex: kcd usr/bin	Search directory containing `bin' such
+				that its immediate parent directory
+				contains `usr'.  Matches `/usr/bin', and
+				`/usr/sbin'.
+	      kcd usr//bin	Search directory containing `bin' such
+				that any of its parent directories
+				contains `usr'.  Matches `/usr/bin',
+				`/usr/local/bin', `/usr/sbin', and
+				`/usr/local/sbin', `/usr/X11R6/bin', etc.
+	  This feature is available when `regex' library is present in
+	  the system.
+	- Find mode supports `/' and `//' special symbols when the key
+	  binding mode is not `vi'.
+	- The `-b' option supports `/' and `//' special symbols.
+	- Add option `--profiles' to display all configuration profiles.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.9.0 from 7.7.0
+(Dec 6, 2004)
+
+	- Mouse double click and triple click now treated as multiple
+	  single clicks.
+	- Repeat mouse scrolling when holded.
+	- New configuration command: MouseScrollRate.
+	- Support key binding in editbox in Find mode (experimental).
+	- Typing any alphanumeric (A-Z, a-z, 0-9) key in emacs key binding
+	  mode also start forward searching.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.7.0 from 7.6.1
+(Aug 2, 2004)
+
+	- GlobPath and GlobDot can be specified at the end of SkipDir
+	  command.
+	- Regular expression supported using r"..." syntax in SkipDir,
+	  ClearStartDir, ClearSkipDir.  `regex' library is required for
+	  this feature.
+	- Generate message during packaging time instead of build time.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.6.1 from 7.6.0
+(Mar 29, 2004)
+
+	- Fix Makefile problem on system without msgfmt.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.6.0 from 7.5.0
+(Mar 27, 2004)
+
+	- Fix fnmatch compilation problem found in some systems with
+	  Apache installed.
+	- Reorganization of README documentation.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.5.0 from 7.3.0
+(Sep 6, 2003)
+
+	- Due to changes in internal handling of command line, `-p' option,
+	  if used, must be the first option in the command line.
+	- Add option `-tr' that rescan before partial tree display.
+	- `-t' and `-tr' now works even when the desired tree is not in the
+	  saved directory tree file.
+	- Add DefaultTree configuration command.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.3.0 from 7.1.0
+(Aug 2, 2003)
+
+	- Add support to specify a particular matched directory using
+	  number.
+	- `-T' option for full tree display is added (currently not useful.
+	  The mechanism to display partial tree by default is still not yet
+	  determined).
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.1.0 from 7.0.0
+(Jul 20, 2003)
+
+	- `-t' option for partial tree display is added.
+	- When symlink points to outside tree, target directory is used
+	  as jump destination instead of the symlink.
+
+------------------------------------------------------------------------------
+
+Changes in Version 7.0.0 from 6.13.0
+(Jul 7, 2003)
+
+	- Minor tweak in error message when bookmarked directory is not
+	  found.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.13.0 from 6.11.0
+(May 29, 2003)
+
+	- Fix a bug when bookmark file is not found.
+	- Fix Ctrl-C processing bug in find mode.
+	- Fix mouse handling bug in configure script.
+	- Accept mouse release and triple-click events.
+	- `-bx' option is removed.
+	- kcd-inst works when user information is not in `passwd' file.
+	- kcd-inst now detects ksh.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.11.0 from 6.9.0
+(Apr 25, 2003)
+
+	- Fuzzy directory searching (Contributed by Robert Sandilands).
+	- Fix directory display bug when directory contains control
+	  characters.
+	- Improve handling of symbolic links that point outside saved tree.
+	- Add vi and emacs key binding mode.
+	- Fix handling of escape sequences in StartDir/SkipDir
+	  configuration.
+	- New configuration commands: FuzzySize, KeyBinding.
+	- Terminal processing of Ctrl-S, Ctrl-Q as stop/continue key is
+	  turned off.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.4.2 from 6.4.1
+(Apr 13, 2003)
+
+	- Fix directory display bug when directory contains control
+	  characters.
+	- Display new directory in case of multiple match.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.9.0 from 6.7.1
+(Apr 7, 2003)
+
+	- Fix bookmark matching.
+	- Prevent adding duplicate directory in bookmark.
+	- Display new directory in case of multiple match.
+	- The option `-bx' now issue a warning about deprecation since
+	  now the bookmark information is stored in `~/.kcd.bookmark.*'.
+	  It will be removed in the next kcd release.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.7.1 from 6.7.0
+(Feb 27, 2003)
+
+	- Fix a segmentation fault during directory display.
+	- Fix a bug in configure script where stream I/O for string class
+	  is not properly detected.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.7.0 from 6.5.3
+(Feb 23, 2003)
+
+	- Bookmark information is completely removed from directory tree
+	  file.  Now kcd relies on `~/.kcd.bookmark.*' for bookmark
+	  information.  So there is no longer loss of bookmarks problem.
+	  Bookmark feature also works faster now.
+	- Fix a bug in configure script where the mouse support status is
+	  not properly displayed.
+	- Support GCC 3.3.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.5.3 from 6.5.2
+(Jan 18, 2003)
+
+	- Fix directory jump bug when the current directory also matches
+	  the search string.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.5.2 from 6.5.1
+(Dec 6, 2002)
+
+	- Add -bx option.  All user of 6.5.0 and 6.5.1 who uses bookmark
+	  feature should run `kcd -bx' once after installation.  This will
+	  prevent loss of bookmarks in certain cases such as full rescan, 
+	  or upgrading to kcd that uses a different directory tree file
+	  format.
+	- KCD_BOOKMARK environment variable is introduced for suid kcd
+	  applications.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.5.1 from 6.5.0
+(Nov 11, 2002)
+
+	- Improve kcd-inst script to update KCD_INIT variable.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.4.1 from 6.4.0
+(Nov 11, 2002)
+
+	- Improve kcd-inst script to update KCD_INIT variable.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.5.0 from 6.4.0
+(Nov 9, 2002)
+
+	- New directory tree file format.  kcd will rescan automatically at
+	  the first run.
+	- Add bookmark feature.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.4.0 from 6.3.0
+(Nov 3, 2002)
+
+	- Fix a directory file reading/writing bug.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.3.0 from 6.1.1
+(Oct 18, 2002)
+
+	- Add configuration profile.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.1.1 from 6.1.0
+(Sep 15, 2002)
+
+	- Fix new exception specification portability issues.
+	- Fix autoconf 2.53 test problems.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.1.0 from 6.0.0
+(Sep 11, 2002)
+
+	- Update to autoconf 2.53.
+	- Update to gettext 0.11.3.
+	- Fix default function argument related compilation problems.
+
+------------------------------------------------------------------------------
+
+Changes in Version 6.0.0 from 5.13.0
+(Jun 2, 2002)
+
+	- Improve ncurses bool workaround logic.
+	- Various portability fixes.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.13.0 from 5.11.0
+(May 10, 2002)
+
+	- Fix '+' display bug.
+	- Implement combining character input in Find mode.
+	- --disable-mouse option added to configure.
+	- Display ^F status.
+	- Fix i18n message generation bug.
+	- Fix portability problems on Solaris 8.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.11.0 from 5.9.0
+(May 6, 2002)
+
+	- Fix symlink jumping bug.
+	- Fix page down bug on some systems.
+	- Improve scanning speed on system supporting d_type.
+	- Improve highlight moving logic.
+	- Rewrite Unicode support to work with combining characters.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.9.0 from 5.7.0
+(May 3, 2002)
+
+	- Shell startup files are no longer modified during make install
+	  or make installuser.
+	- User-specific installation mode removed.  Set --prefix option
+	  during configure to inside your home directory instead.
+	- Improved display speed.
+	- Workaround strftime configure problem on Solaris 8.
+	- Fix portability bug in editbox.cc.
+	- Fix blinking problem in status bar.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.7.2 from 5.7.1
+(May 1, 2002)
+
+	- Fix portability bug in editbox.cc.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.7.1 from 5.7.0
+(Apr 27, 2002)
+
+	- Workaround strftime configure problem on Solaris 8.
+	- Fix buffer.cc compilation problem.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.7.0 from 5.5.1
+(Jul 7, 2001)
+
+	- Support FHS standard by default.  If configure detect FHS
+	  directory structure, the following are changes to kcd behavior
+	  - Man page is installed in /usr/share/man/en/man1
+	    or /opt/.../share/man/en/man1.
+	  - kcd looks for the global configuration file kcd.conf in /etc 
+	    or /etc/opt/...
+	- kcd only now looks for kcd.conf in SYSCONFDIR instead of /etc,
+	  /usr/etc and /usr/local/etc.
+	  (based on the changes in FreeBSD port of kcd by FreeBSD people.)  
+	- Fix <malloc.h> header portability.
+	  (based on the changes in FreeBSD port of kcd by FreeBSD people.)  
+	- Reorganize INSTALL documentation.
+	- Modify ~/.bashrc, ~/.cshrc and ~/.zshrc instead of ~/.profile,
+	  ~/.login and ~/.zprofile during user-specific installation.
+	  In case user's login shell is ash, ~/.profile is still modified.
+	- New kcd-inst program that modify ~/.bashrc, ~/.cshrc, ~/.zshrc or
+	  ~/.profile after installation.  This is useful for system-wide
+	  installation.
+	- Support GCC 3.0.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.0.3 from 5.0.2
+(May 6, 2001)
+
+	- Support GCC 3.0.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.5.1
+(Oct 8, 2000)
+
+	- Fix control key processing in find edit box.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.5.0
+(Sep 15, 2000)
+
+	- Bad StartDir, SkipDir commands no longer terminate kcd via
+	  internal error message.
+	- UTF-8 support status in --features now reports compile time
+	  status.
+	- Various code reorganization.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.3.3
+(Sep 8, 2000)
+
+	- Various RPM spec file enhancements from Max Heijndijk.
+	- RPM, SRPM now contains locale support.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.3.2
+(Sep 8, 2000)
+
+	- Bug fix - problem locating locale directory.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.3.1
+(Sep 7, 2000)
+
+	- Bug fix - en_GB.po message file was incorrectly named.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.3.0 from 5.1.2
+(Sep 7, 2000)
+
+	- Option --enable-wide-chars and --with-included-gettext
+	  really work now.
+	- Smart scan now works properly when StartDir in the configuration
+	  changes.
+	- Security checks support for sudo, suid uses.
+	- Some code reorganization.
+	- Bug fix - information in directory list screen is not displayed.
+	- Bug fix - junk characters may appear before the first directory
+	  in the directory tree window.
+	- Bug fix - some 5 bytes multibyte sequence is not correctly
+	  decoded.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.1.3
+(Aug 28, 2000)
+
+	- Update for autodep 1.1.3.
+	- Rename configure option --enable-wide-char to
+	  --enable-wide-chars to match xterm.
+	- Can build on system without msgfmt.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.1.2
+(Aug 27, 2000)
+
+	- Update for CVS version of autoconf (autoconf 2.49a).
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.1.1
+(Aug 22, 2000)
+
+	- Fix problems with --with-included-gettext.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.1.0 from 5.0.0
+(Aug 20, 2000)
+
+	- Fix a bug that can cause infinite loop.
+	- Check environment locale.
+	- Speedup command of the form `kcd dir' where the number of
+	  directories that matches `dir' is no more than ShowListThreshold.
+	  This is even faster than before gettext changes.
+	- Add gettext infrastructure.
+	- Add Unicode infrastructure.
+	- Correct display problem with control characters.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.0.2 from 5.0.1
+(Aug 19, 2000)
+
+	- Fix insert/overtype status update.
+	- Display control codes as ? on the screen.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.0.1 from 5.0.0
+(Aug 12, 2000)
+
+	- Fix an infinite loop.
+
+------------------------------------------------------------------------------
+
+Changes in Version 5.0.0
+(Aug 11, 2000)
+
+	- Changes of variable type to work with 64-bit CPUs.
+	- Flag -W is used to compile under GCC.
+	- Multiple -rp options allowed.
+	- Add more malloc test.  Program default is no test performed
+	  unless --enable-debug-memory is given to configure.
+	- Fix directory name lookup of the form `~user'.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.18.0
+(Aug 4, 2000)
+
+	- Update timestamp when the directory previously skipped is no longer
+	  in SkipDir.
+	- Fix various memory leak.
+	- Fix directory tree header check.
+	- Abort when flags in the directory tree are invalid.
+	- More errors are reported during directory scanning.
+	- Add --enable/disable-debug-memory to turn on/off memory checks to
+	  configure script.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.17.4
+(Jun 4, 2000)
+
+	- Weaken malloc test to work around GCC stack unwinding bug.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.17.3
+(Jun 3, 2000)
+
+	- Fix new directories test logic in smart scan.
+	- As a result of bug fixes, kcd is forced to rescan automatically
+	  upon the first run to fix possible errors in previously saved
+	  directory tree.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.17.2
+(Jun 1, 2000)
+
+	- Always dump core in the directory kcd was invoked.
+	- Fix errors in BUGREPORT.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.17.1
+(May 29, 2000)
+
+	- Detect malloc errors.  May not compile on some OS.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.17.0
+(May 27, 2000)
+
+	- Color settings can accept default background color.
+	- DefaultBackground configuration command added.
+	- More documentation in SGML format.
+	- Detect certain errors that cause kcd to allocate too much memory.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.16.1
+(Mar 16, 2000)
+
+	- Work with zlib older than 1.0.6.
+	- Bug fix in configure check for ncurses bool size.
+	- Use $HOME environment variable if home directory lookup using
+	  passwd entry fails.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.16.0
+(Mar 10, 2000)
+
+	- Fix window resize bug introduced in 4.15.1.
+	- Add configuration commands for color settings.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.15.1
+(Mar 8, 2000)
+
+	- Fix a line drawing bug in directory tree mode.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.15.0
+(Mar 8, 2000)
+
+	- Multiple rescanning options can be combined.  For example, you can
+	  now write `kcd -rfq' instead of `kcd -rf -rq'.
+	- New option -rp DIR for scanning part of directory tree beginning 
+	  at DIR.
+	- Configuration command QuietPartialScan is now documented.
+	- Invalid command line now triggers error message instead of help.
+	- Fix a bug that make QuietSmartScan status be ignored.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.14.0
+(Feb 28, 2000)
+
+	- Change configuration file read order to
+	  /etc/kcd.conf -> /usr/etc/kcd.conf -> /usr/local/etc/kcd.conf
+	    -> ~/.kcd.conf.
+	- Some code reorganization.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.13.0
+(Feb 15, 2000)
+
+	- Read kcd.conf in /usr/local/etc and /usr/etc.
+	- Add --config option.
+	- Add spec file for building RPM files.
+	- No longer install /etc/profile.d/kcd.zsh.
+	- Add GlobDot and GlobPath configuration command.
+	- SkipDir, ClearSkipDir, ClearStartDir accepts wildcards.
+	- Old-style SkipDir syntax is now depreciated.  A warning message
+	  will be printed on the screen if such command is found.
+	- New file format.  kcd is forced to rescan automatically at the first
+	  run.
+	- Update email address and program home page.
+	- Major code reorganization.
+	- More changes toward ISO C++ standard.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.11.2
+(Jan 11, 2000)
+
+	- Detect and provide work-around for ncurses that is not compiled 
+	  to support C++ during configure.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.11.1 from 4.11.0
+(Aug 31, 1999)
+
+	- Fix symbolic link display and select bug.
+	- Minor changes to kcd.sh.* and kcd.csh.* and document about
+	  LD_LIBRARY_PATH and TERMINFO environment variables in 
+	  the troubleshooting section of INSTALL.
+	- Update to work with zlib 1.0.6 or newer.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.11.0 from 4.7.9
+(Mar 27, 1999)
+
+	- Update for Redhat 5.2 which uses an ncurses pre-5.0 snapshot.
+	- Update for autoconf 2.13.
+	- More changes toward ISO C++ standard.
+	- This requires at least gcc-2.8.0 or egcs-1.0 to compile.
+	- Fix a bug when all StartDir directories are cleared by
+	  ClearStartDir, previous versions of kcd does not scan any directory.
+	  Now kcd does as if there is no StartDir commands.
+	- Fix a bug when duplicate directories are given to SkipDir using
+	  old-style syntax.
+	- Fix error report when root directory are given to SkipDir using
+	  old-style syntax.
+	- Better up/down key navigation - When there are multiple directories
+	  directly above/below the current directory, the one with more
+	  overlap extent is chosen rather than the first one found.
+	- Pressing up/down in find mode do not center the match directory
+	  if it is visible on the screen before searching.
+	- Directory that no longer exists are automatically
+	  skipped when find using command line.
+	- Improved system-wide installation process:
+	    - Support installation into its own new directories 
+	      (such as /package/kcd).
+	    - The directory containing kcd programs is automatically added
+	      to the PATH environment variable if it is not there.
+	    - If /etc/profile.d exists, kcd alias/function initialization 
+	      scripts are installed into /etc/profile.d.  This avoids
+	      modifying /etc/profile, /etc/csh.login and /etc/zprofile.
+	    - Works with parallel build.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.7.13
+(Aug 5, 2000)
+
+	- Works on IA-64 platform.
+	- Update email and home page address in documentation.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.7.11
+(Sep 5, 1999)
+
+	- Update for zlib 1.0.6 and newer.
+	- Make constant member data static.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.7.10
+(Feb 13, 1999)
+
+	- Update for Redhat 5.2 which uses an ncurses pre-5.0 snapshot.
+	- Update for autoconf 2.13.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.7.9
+(Feb 23, 1998)
+
+	- Change the default behavior of scroll bar.  It is on for ncurses
+	  version >= 4.2.
+	- For system-wide installation, also modify /etc/zprofile if it
+	  exists.
+	- For user-specific installation, also modify ~/.zprofile if the
+	  login shell is zsh.
+	- Use gzip -f when compressing man page during `make install'.
+	- Fix various documentation (README, kcd.1) errors.
+	- End each C++ source file by a new line (as in C++ standard).
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.7.8
+(Jan 21, 1998)
+
+	- Changed symbolic links are now updated when scanned in smart mode.
+	- kcd now does not scan inside symbolic links given in `StartDir'.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.7.7
+(Jan 19, 1998)
+
+	- During configure, test if the ncurses library really has mouse 
+	  functions.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.7.6
+(Nov 23, 1997)
+
+	- Fix a bug in configure script that always pick libncurses.a rather 
+	  than libncurses.so when --with-static-ncurses is not given.
+	- Changes to reflex the string library in libstdc++ found in egcs.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.7.5
+(Nov 3, 1997)
+
+	- New configure option --with-static-ncurses.  Using this option 
+	  solves some kcd compilation problems related to old shared ncurses
+	  libraries.  The default ncurses installation process only 
+	  builds and installs static libraries, leaving shared
+	  libraries from the old ncurses lying around.
+	- Fix a small bug.  kcd fails to cycle through all matched directory 
+	  if current directory is matched to the search string and
+	  is the last directory in the tree.
+	- Fix a bug in configure script.  operator delete test returns value 
+	  when it shouldn't.
+	- Fix Makefile.in, not all dependency was listed there.
+	- Use libc/glibc strcasecmp and strncasecmp functions when they are 
+	  available.
+	- `make install' will install compressed version of kcd.1 if 
+	  prefix/man/man1/*.gz exists.
+	- `using namespace std;' supported.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.7.0
+(Aug 10, 1997)
+
+	- Symbolic links are shown using different color.
+	- ClearStartDir, ClearSkipDir commands now accept directory name as 
+	  the parameters.
+	- Mouse support (experimental - just mouse click, no mouse drag yet).
+	- New configuration command - `GraphicChar' determining whether 
+	  PC line graphic chars or simple '-', '+', '|' chars are used.
+	- More strict test of .kcd.save.gz.  This prevents kcd from 
+	  segmentation fault when reading file created by previous 
+	  versions of kcd which was compiled with different 
+	  sizeof(mode_t) (caused when upgrading libc 5 to glibc 2).
+	- Better control on scroll bars - they are hidden if not needed.
+	- Pan left/right of highlight that is wider than screen enabled
+	  via `,' and `.' keys.
+	- New configuration command - `ScrollBar' to enable scroll bar display.
+	  By default, scroll bars are hidden.  This will be changed 
+	  in later versions once a new version of ncurses is released.
+	  ncurses 4.1 and earlier version have a bug that causes 
+	  the vertical scroll bar to flicker heavily during scrolling.
+	- Improved configure script - several C++ features are tested.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.5.1
+(Jul 23, 1997)
+
+	- Remove various messages printed during directory scanning since they 
+	  are intended only for debugging purpose.
+	- Fix a segmentation fault when exiting kcd.
+	- Program freezes when saved directory tree contains circular symbolic 
+	  link fixed.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.5.0 from 4.0.1
+(Jul 22, 1997)
+
+	- Support symbolic link.
+	- Automate dependency checks in Makefile.  (A Perl script, autodep, is
+	  provided at ftp://kcd.sourceforge.net/pub/kcd/infrastructure/ to 
+	  rebuild them.)
+	- Automate version number, release date and file sizes info in 
+	  README, CHANGES, kcd-?.?.?.lsm, kcd.1 and kcdmain.cc during
+	  packaging.
+	- Improve configure and Makefile to support srcdir option.  Object
+	  and output files are properly placed in the desired
+	  directory.
+	- `-' used to ignore error when installing man page.
+	- Various hardcoded limits removed, such as max. configuration columns.
+	- When unrecognized command is found in configuration file, kcd now
+	  aborts immediately.
+	- When the line that causes error in configuration is printed, any
+	  control characters present will be shown as `.'.
+	- Source files *.cpp renamed to *.cc.
+	- Various fixes in comments in the header of *.h, *.cc.
+	- New screen layout.
+	- Detect window size and refuse to continue if window too small.
+	- Works with all directory with special chars under bash-2.0.
+	- Add scroll bars.
+	- Highlighted directory is shown on the bottom bar.
+	- Better Up/Down arrow key navigation.
+	- Support symbolic link selection.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.0.2 from 4.0.1
+(Aug 5, 1997)
+	- New configuration command - `GraphicChar' determining whether 
+	  PC line graphic chars or simple '-', '+', '|' chars are used.
+	- More strict test of .kcd.save.gz.  This prevents kcd from 
+	  segmentation fault when reading file created by previous 
+	  versions of kcd which was compiled with different 
+	  sizeof(mode_t) (caused when upgrading libc 5 to glibc 2).
+	- Bugs in PgUp, PgDn response fixed.
+	- kcd is now compiled and linked using `g++' instead of `gcc'.
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.0.1
+(Mar 14, 1997)
+
+	- Compiles even when resizeterm is not found.  Window resize under
+	  xterm/rxvt is disabled in this case.
+
+	Improved configure script
+	- Check for the present of local ncurses, zlib in ../lib before the
+	  global one.
+	- Separate library test and header test for ncurses and zlib.
+	- Display error when --bindir, --exec-prefix option is specified.
+
+	Makefile
+	- `make clean' and `make distclean' now remove buffer.o
+	- Add `config.h' to list of dependent file.
+
+	New kcd options, --features and --helpinst
+
+------------------------------------------------------------------------------
+
+Changes in Version 4.0.0
+(Mar 7, 1997)
+
+	- New style syntax in configuration file.  Spaces are allowed inside
+	  commands but double quotes ("...") are required to enclose
+	  directory names.
+	  For example:
+		(earlier versions)	SkipDir=/cdrom
+		(new syntax)		SkipDir = "/cdrom"
+	- kcd now understands ~ and ~username specified in configuration file.
+	- User will have to press Enter if any error is found in configuration
+	  file.
+	- The line that causes error in configuration is printed.
+	- Directory tree are sorted (case-insensitive) by default.
+	- All error reports use mixed case for config name, for example,
+	  `skipdir' now becomes `SkipDir'.
+	- New configuration command - `ClearSkipDir', `ClearStartDir', 
+	  `SortTree', `SpaceSelect', `StartDir', `CaseSensitiveSort',
+	  `QuietSmartScan'.
+	- kcd version number in the directory tree screen reflects the version
+	  of kcd running - not the kcd that creates the directory tree
+	  file.
+	- New file format.  kcd is forced to rescan automatically at the first
+	  run.  The new format is no longer HTML-based, so do NOT use
+	  khyper (came with earlier versions of kcd) to view .kcd.save.gz
+	- Directory scanning can be terminated (except at the moment kcd is
+	  writing data file which is immediately after finish scanning
+	  and before time spent is displayed) without losing earlier
+	  saved data.
+	- Configuration files are read when kcd displays directory tree and
+	  changes directory as well (although the loading message is
+	  not explicitly shown).
+	- kcd automatically redraw the screen when the window is resized
+	  (under xterm).  The new ncurses-4.0 library is required to
+	  support this feature.
+	- In find mode (directory tree view), PgUp and PgDn behave like up and
+	  down arrows respectively.
+	- The way comment is handled in configuration is read changed - `#' 
+	  inside double quotes (such as SkipDir="...") are treated as part of
+	  directory name, not as comment.
+	- Use configure script (autoconf-2.12)
+	- kcd.sh.init, kcd.csh.init are automatically configured to the
+	  installing directory.
+	- By default, kcd will be installed in
+			/usr/local/bin
+	  for all new installations and in
+			/usr/bin
+	  for upgrading from earlier versions.
+	  However, this behavior can be overridden by
+			configure --prefix=PREFIX
+	  (where PREFIX is /usr if you want to install in /usr/bin).
+	- New kcdmain options: -ias, -ics, -ifs to support installation in
+	  directories other than /usr/bin .
+	- Generated binary (`kcdmain') are not stripped - To strip the symbol
+	  table, type
+			make strip
+	- Makefile:
+		- -I$(includedir) (which is /usr/include) removed.
+		- -L$(libdir) (which is /usr/lib) removed.
+		- Dependent files are .h instead of .o .
+		- Use install instead of cp.
+		- Use configure.
+		- New `strip', `clean' and `distclean' targets
+	
+	- Smart scan mode implemented - almost twice as fast as the original
+	  (now called full scan) mode.  (49 secs VS 91 secs on my 
+	  system, both are tested immediately after system reboot.)
+	- New option `-rf' to force full scan mode - needed when you modify
+		config (SortTree, ...).
+	- File listing moved from README to FILELIST .
+
+	- Makefile.userinst:
+		- Program restructure.
+		- Fix error message dir. name from kcd to $HOME/kcd-bin .
+		- Change -e to -f since -e is nonstandard.
+		- Use install program supplied by configure.
+	- kcd.csh.userinit - change $HOME to $home .
+	- Test with directories with odd names such as `$HOME', `<', etc.
+	  Most works fine except single quotes `'' and ``'.  Others 
+	  are shell dependent.  bash (version prior 2.0) may display 
+	  directory containing `$' incorrectly at the prompt although 
+	  the directory change by kcd succeed.
+	- New `\' quoting support for configuration values inside "...".
+	  The character following `\' is treat as ordinary character.
+	  `\', `'', `"' and ``' must be quoted as `\\', `\'', `\"'
+	  and `\`' respectively.   Directory name containing `?', `*', 
+	  `{' and `}' must also be quoted (for future features).
+	- If the number directories that matches to the name given in
+	  the command line exceeds a specified number,  kcd displays
+	  the whole list.
+	- Pressing Backspace or Del when the search string is empty exit 
+	  find mode in directory tree window.
+	- Replace `~' with `$HOME' in Makefile.userinst2
+	- Add a man page kcd.1  It is mostly similar to README with 
+		- no `kcd Basics', `System Requirements', ... sections.
+		- different description for shell alias/function options to 
+		  fit standard man page format.
+	- Current working directory is automatically added to the directory
+	  tree window if it is not in the saved tree.  They are
+	  shown with `[*]'.  The new directory is, however, not saved 
+	  to the file.  As a result of this change, kcd no longer 
+	  generates the
+			`kcd: cannot find <A NAME="...">'
+	  error message.
+
+------------------------------------------------------------------------------
+
+Changes in Version 3.1.0
+(Jan 13, 1997)
+
+	khyper removed from this package.
+	Fix editbox.cpp, editbox.h file permissions (previously executable).
+	In find mode, control keys are no longer added into the search
+		string.
+	kcdscr passes more than one parameter to kcdmain so that help message
+		is shown when too many parameters are given.
+	Use our own version of strncase(...) - more portable.
+	Fix kcd.sh.userinit and kcd.csh.userinit, now path is correctly set
+		to ~/kcd-bin instead of ~/kcd.
+	Fix a bug when directory names contain chars in the 128..255 range.
+	Directory scan time is displayed.
+	New option `-rQ' and new configuration command `quietfullscan'. (*)
+
+(*) = It is intended to use with new features (currently not implemented)
+      found in kcd-4.0.0.
+
+------------------------------------------------------------------------------
+
+Changes in Version 3.0.1  (Contains kcdmain 3.0.1 and khyper 0.4.0)
+(Dec 27, 1996)
+
+	Fix a bug - now works with directory name containing `&'.  File 
+		format ID is also changed to force kcd to rescan directory 
+		automatically at the first run.
+
+	*** khyper is still in this version and will be removed from
+	    kcd-3.1.0 ***
+
+------------------------------------------------------------------------------
+
+Changes in Version 3.0.0  (Contains kcdmain 3.0.0 and khyper 0.4.0)
+(Dec 24, 1996)
+
+Installation script now support users without root access.
+
+For kcdmain (directory rescan):
+
+	Not enough memory bug fixed - no memory allocate for reporting error.
+	No longer use khyper to display directory tree.
+	Find directory implemented.
+	'q' key no longer exit the program.
+	Center keypad now center highlight bar on the screen (cursor lock mode
+		only).
+	New options -iau, -icu and -ifu to support installation in user's
+		home directory.
+
+For khyper (directory tree display):
+	
+	*** This is the last version that includes khyper.  Future khyper will 
+	    be available in a separate package ***
+
+	Not enough memory bug fixed - no memory allocate for reporting error.
+	Add support for <B>...</B>, <I>...</I>, <CITE>...</CITE>,
+		<EM>...</EM>, <STRONG>...</STRONG> (use different color)
+	<H?>...</H?> now displayed in different color from normal text
+	Center keypad now center highlight bar on the screen (cursor lock mode
+		only).
+
+------------------------------------------------------------------------------
+
+Changes in Version 2.0.2  (Contains kcdmain 2.0.2 and khyper 0.3.0)
+(Nov 24, 1996)
+
+kcdmain and khyper executables are no longer included due to possible
+conflict when user's ncurses library is compiled using a different version
+of gcc (C++ bool variable type).
+
+For kcdmain (directory rescan):
+
+	Fix a bug in time stamp inside `.kcd.save.gz'.
+	Test with zlib 1.0.4
+
+For khyper (directory tree display):
+
+	Add check for filename with or without `.gz'.
+	Cursor is now properly placed in the lower-right corner after the
+		first screen paint for -c option.
+	Test with zlib 1.0.4
+	Works with non-preformatted text that cannot be wrapped.
+	Add support for <BLOCKQUOTE>...</BLOCKQUOTE>
+	Check for ncurses memory allocation error
+	ISO 8859-1 chars set supported
+
+------------------------------------------------------------------------------
+
+Changes in Version 2.0.1  (Contains kcdmain 2.0.1 and khyper 0.2.1)
+(Nov 1, 1996)
+
+For kcdmain (directory rescan):
+
+	Fix bugs in array size.
+	Sorted option in help.
+	Nicer error messages.
+
+For khyper (directory tree display):
+
+	Fix bugs in array size.
+	Sorted option in help.
+	Nicer error messages.
+
+Makefile:
+
+	Some cleanup.
+
+------------------------------------------------------------------------------
+
+Changes in Version 2.0.0  (Contains kcdmain 2.0.0 and khyper 0.2.0)
+(Oct 27, 1996)
+
+For kcdmain (directory rescan):
+
+	The format of .kcd.save.gz has been changed.  But kcdmain can detect
+	this and rescan directory to generate a new one.
+
+	You can now jump directly to the desired directory by the using the
+	following syntax to invoke kcd:
+
+			kcd <portion of directory name>
+
+
+	New -ia, -ic and -if option, for 'kcd' alias or function installation.
+	Use
+			eval `kcdmain -ic`
+
+	for C shell-style syntax or
+
+			eval `kcdmain -ia`
+
+	for shells that support alias or
+
+			eval `kcdmain -if`
+
+	for shells that support functions.
+
+
+	More error checking.
+
+	Directories without read or execute permission are marked with 
+	[unreadable].
+
+	The zlib version required is 0.95, not 1.0.95 mentioned in kcd 1.0.0 
+	README file.
+
+
+For khyper (directory tree display):
+
+	Up and down arrow keys behavior change, now it moves the highlight
+	bar to the link directly above or below the current one.
+
+	Pressing F10 or ^C (Ctrl-C) now exits khyper.  The previously
+	defined 'q' key also works but produce a warning.  All alphanumeric
+	keys are reserved for text find feature in the future version.
+
+	F8 now repaints screen.
+
+	Status bar added and the F9 key is used to switch between status
+	display.
+
+	Screen flicker during scrolling and initial screen display is
+	totally eliminated.
+
+	Option "-l" (search for link text and jump directly) is implemented.
+
+	Tested under xterm.
+
+	Change various character attributes (for monochrome terminals and
+	xterm).
+
+	More error checking.
+
+	The zlib version required is 0.95, not 1.0.95 mentioned in kcd 1.0.0 
+	README file.
+
+
+For khyper File Syntax:
+
+	khyper now ignores all unrecognized tags and will not report error
+	message.
+
+	For syntax error in recognized tags, khyper reports a more detailed 
+	message including line and a small fraction of file that cause the
+	problem.
+
+	<A HREF="...">...</A> used to load another document is now
+	supported.
+
+	<A NAME="..."> now supports a closing </A> (comply to HTML standard).
+	The </A> is optional but highly recommended for compatibility with
+	future versions of khyper.
+
+	Nested <A HREF=...>, <A NAME="..."> in any combination is not
+	allowed yet.
+
+	HTML <P>, </P>, <PRE>...</PRE>, <OL>...</OL>, <UL>...</UL>, <LI>,
+	<HR> and <!--....--> tags and the new &quot; escape are implemented.
+
+	<TITLE>...</TITLE> used to show document title on the status bar.
+
+	khyper understands <H?> and </H?> (? = 1,2,3,4,5,6) tags and add an 
+	empty line.  There is no attempt to display text larger than normal 
+	due to limitation of text mode program.
+
+	" ' and ` inside <A HREF=...> and <A NAME=...> tags can be nested.
+	For example, <A HREF=`echo "$HOME,`date`"`> is properly parsed.
+
+------------------------------------------------------------------------------
+
+Changes in Version 1.0.0
+(Sep 26, 1996)
+
+	This is the first version.  It contains kcdmain 1.0.0 and 
+	khyper 0.1.0.

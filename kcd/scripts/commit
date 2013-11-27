@@ -1,0 +1,132 @@
+#!/bin/sh
+# commit
+# Copyright (c) 2000, 2001, 2009 Kriang Lerdsuwanakij
+# email:	lerdsuwa@users.sourceforge.net
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+#
+# Set temporary filenames
+#
+
+PACKAGE=kcd
+DIFF_FILE="/tmp/$PACKAGE-cvs-diff-$USER"
+LOG_FILE="/tmp/$PACKAGE-cvs-log-$USER"
+CHLOG_FILE="/tmp/$PACKAGE-cvs-chlog-$USER"
+RPCP_IN_FILE="/tmp/$PACKAGE-rpcp-in-$USER"
+RPCP_OUT_FILE="/tmp/$PACKAGE-rpcp-out-$USER"
+
+#
+# Sanitiy check, abort if fail
+#
+
+# Must run this script from package root directory
+scripts/dircheck || exit 0
+
+if test "x$EDITOR" = "x"; then
+	EDITOR=joe
+fi
+
+# Clean up previous results, if any
+rm -f $DIFF_FILE || exit 0
+rm -f $LOG_FILE || exit 0
+rm -f $CHLOG_FILE || exit 0
+rm -f $RPCP_IN_FILE || exit 0
+rm -f $RPCP_OUT_FILE || exit 0
+
+#
+# Get diff file
+#
+
+cvs diff -cp "$@" > $DIFF_FILE
+if grep "^cvs diff: I know nothing about" $DIFF_FILE; then
+
+	# Errors are already shown during grep, exit
+	rm -f $DIFF_FILE
+	exit 0
+
+elif grep '^diff -c -p' $DIFF_FILE; then
+
+	# Changes detected
+	true
+elif grep 'no comparison available' $DIFF_FILE; then
+
+	# Files added or deleted
+	true
+else
+
+	# Report errors or no changes then exit
+	cat $DIFF_FILE
+	rm -f $DIFF_FILE
+	exit 0
+fi
+
+#
+# Prepare ChangeLog template
+#
+
+# Create date stamp
+date +"%Y-%m-%d" | tr -d \\n\\r > $LOG_FILE
+
+# Get user name and email from scripts/commit-template using $USER
+echo "  $USER" > $RPCP_IN_FILE
+echo "" >> $RPCP_IN_FILE
+echo "" >> $RPCP_IN_FILE
+echo "" >> $RPCP_IN_FILE
+scripts/rpcp scripts/commit-template $RPCP_IN_FILE $RPCP_OUT_FILE
+cat $RPCP_OUT_FILE >> $LOG_FILE
+
+#
+# Edit ChangeLog
+#
+
+$EDITOR $LOG_FILE $DIFF_FILE
+
+#
+# Commit
+#
+
+if grep ':' $LOG_FILE; then
+		# Use $* here so that it is expanded to only one argument
+	if test -z "$*"; then
+
+		# No arguments present in the command line, commit all file
+		cp ChangeLog $CHLOG_FILE \
+		 && cat $LOG_FILE $CHLOG_FILE > ChangeLog \
+		 && cvs commit -F $LOG_FILE "$@"
+	else
+
+		# Commit only ChangeLog and files given in the command line
+		cp ChangeLog $CHLOG_FILE \
+		 && cat $LOG_FILE $CHLOG_FILE > ChangeLog \
+		 && cvs commit -F $LOG_FILE ChangeLog "$@"
+	fi
+
+	# Cleanup
+	rm -f $DIFF_FILE $LOG_FILE $CHLOG_FILE
+	rm -f $RPCP_IN_FILE $RPCP_OUT_FILE
+	rm -f $DIFF_FILE~ $LOG_FILE~
+
+	exit 0
+else
+
+	# Cleanup
+	rm -f $DIFF_FILE $LOG_FILE $CHLOG_FILE
+	rm -f $RPCP_IN_FILE $RPCP_OUT_FILE
+	rm -f $DIFF_FILE~ $LOG_FILE~
+
+	exit 1
+fi
+

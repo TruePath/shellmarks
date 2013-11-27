@@ -1,0 +1,112 @@
+<sect1><title>kcd Basics</title>
+<para>
+kcd works by consulting the directory tree file for the list of
+directories available.  By default the file is named
+<filename>~/.kcd.save.kcd.gz</filename>
+but may change according to the kcd configuration file.  This file is 
+automatically created when kcd is run for the first time.
+</para>
+
+<para>
+When you type the command 
+<screen>
+          kcd
+</screen>
+it will display the saved entire directory tree and place the highlight bar 
+on the current directory.  You can use 
+<keycap>arrow keys</keycap>, <keycap>Page up</keycap>, 
+<keycap>Page down</keycap>, <keycap>Home</keycap> and 
+<keycap>End</keycap> 
+keys to move the highlight bar to the desired directory.  Pressing 
+<keycap>Enter</keycap> 
+will exit kcd and jump the the selected directory.  If you choose to 
+remain in the current directory, just press <keycap>F10</keycap>
+or <keycombo><keycap>Ctrl</keycap><keycap>C</keycap></keycombo>.
+</para>
+
+<para>
+If you know the name of directory you want to change to, for example,
+<filename>/usr/include</filename>,  you can type
+<screen>
+          kcd include
+</screen>
+To save some keystrokes, you can type only a part of 
+<filename>include</filename> such as
+<screen>
+          kcd incl
+</screen>
+</para>
+
+<para>
+If kcd found from that there are more than 4 directories contain the 
+text <filename>include</filename> or <filename>incl</filename> 
+(for the second example),  it will list all matched 
+directories.  You can again use 
+<keycap>arrow keys</keycap>, <keycap>Page up</keycap>, 
+<keycap>Page down</keycap>, etc. to move
+the highlight bar to <filename>/usr/include</filename> and press 
+<keycap>Enter</keycap>.
+</para>
+
+<para>
+If there are less than or equal 4 matched directory, kcd will pick a
+directory and jump.  Repeat the same kcd command, in this case 
+<command>kcd include</command>
+or <command>kcd incl</command>, will go to the next matched one, and so on.   
+You can use shell's command history for this purpose.  
+For example, in several shells, 
+pressing <keycap>Up</keycap> arrow key and <keycap>Enter</keycap> 
+will repeat the previous command.  You may
+change the number of matched directory threshold to any value other than 4
+by modifying configuration file.  See the `Configuration File' section 
+below.
+</para>
+
+<para>
+On the other hand, if kcd cannot find the requested directory,
+fuzzy finding mode is used.  In fuzzy mode, directories that approximately
+matches the given text is listed.  By default, fuzzy mode will find 10
+closest matches.  This too can be changed by the configuration file.
+</para>
+
+<para>
+You may create bookmarks via option <option>-ba</option> to help locate frequently
+accessed directories.  When kcd searches for directories matching a given
+text and finds that at least one is bookmarked, then all non-bookmarked 
+directories are ignored.  So bookmarked directories are always chosen over
+non-bookmarked ones.  You can override this behavior by supplying kcd with 
+<option>-B</option> option before the text such as
+<screen>
+          kcd -B incl
+</screen>
+</para>
+
+<para>
+You can also list all bookmarked directory using <option>-b</option> option.
+</para>
+
+<para>
+While in full screen mode, besides using arrow keys, etc. to move the highlight bar,  you may
+type the some text string to limit the highlight bar to move between items
+containing the string.  The text string is shown at the bottom of the screen
+inside [...].  
+To restore highlight bar behavior,  press <keycap>Tab</keycap> key.
+</para>
+
+<para>
+The list of directories used in all operations above is taken from 
+<filename>~/.kcd.save.gz</filename>.  
+You may want to update it when directories are added or removed.
+To update the file,  type
+<screen>
+          kcd -r
+</screen>
+This will still use some information from the old file, especially directory 
+time stamp, to speedup directory scanning.  If you found that simply using 
+<command>kcd -r</command> is not accurate, most likely to be due to changed 
+configuration file,  use the following command instead
+<screen>
+          kcd -rf
+</screen>
+</para>
+</sect1>

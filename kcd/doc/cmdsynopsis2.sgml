@@ -1,0 +1,111 @@
+<para>
+The following are two different ways to rescan directory, the entire tree
+or only part of the tree.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-r</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Rescan directory tree using the default mode as 
+specified in configuration file.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-rp</arg>
+  <arg choice=opt><replaceable>DIR</replaceable></arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Rescan part of directory tree beginning at <replaceable>DIR</replaceable>.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>
+You may modify default scanning behavior using additional options
+<option>-rf</option>, <option>-rq</option>, and <option>-rQ</option>.
+Note that if <option>-r</option> or <option>-rp</option> is not
+given in the command line, the option <option>-r</option> is implied
+there.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-rf</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Rescan directory using <glossterm>full scan mode</glossterm>.  kcd will 
+ignore all previously saved directory tree information 
+and start scanning from scratch.  By default, the 
+<glossterm>smart scan mode</glossterm> is used whenever possible to reduce 
+time needed for directory scanning.   
+</para>
+<para>
+The full scan mode is provided in case you change 
+configuration files - some change may not take effect
+until you recan in full mode.
+</para>
+<para>
+Another possible problem is that some old file system 
+may not have the change time (which is updated when 
+directory permission is changed) so that kcd cannot 
+correctly update the directory tree.  (msdos file 
+system is an example, but fortunately we cannot 
+change their directory permission anyway.)
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-rq</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Rescan part of directory tree beginning at <replaceable>DIR</replaceable>.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-rQ</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Rescan directory tree using the verbose mode
+(opposite of <option>-rq</option>), overriding default mode.  
+Current checked directory is displayed.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>
+Rescan options can be combined, i.e., <command>kcd -rf -rq</command> is the same as 
+<command>kcd -rfq</command>.
+</para>

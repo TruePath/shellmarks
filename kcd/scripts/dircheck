@@ -1,0 +1,6 @@
+#!/bin/sh
+if test -e kcdmain.cc; then
+	exit 0
+fi
+echo cannot run from this directory
+exit 1

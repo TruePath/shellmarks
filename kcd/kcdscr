@@ -1,0 +1,35 @@
+#
+# kcdscr - Script required for proper operation of kcd 
+#
+# To run kcdscr, use ". kcdscr", "source kcdscr" or even better, "kcd".
+# Type "kcdscr" directly will not work since a new shell is spawned and the
+# "cd" command below will only change the working directory of the new shell,
+# not the current one.
+#
+# "kcd" works when the shell alias or function named "kcd" is properly
+# defined.  If not, modify your startup files as indicated in the INSTALL
+# file.  You may install "kcd" shell alias/function at anytime by typing
+# "kcdmain -ia", "kcdmain -if" or "kcdmain -ic", choose the one that works 
+# with your shell.
+#
+
+				# Remove dangerous environment variables.
+				# They can be used to overwrite the target
+				# file.  If you need this feature, either
+				# modify this file or copy this and set all
+				# of KCD_TEMP, KCD_DIRTREE and KCD_CONFIG
+				# explicitly.
+
+unset KCD_TEMP			# Can be overwritten by kcd
+unset KCD_DIRTREE		# Can be overwritten by kcd
+unset KCD_CONFIG		# kcd never write to this file.  It could
+				# read content from files you are not 
+				# supposed to.
+
+kcdmain "$@"
+				# Allow too many parameters detection since
+				# kcdscr passes more param than needed by
+				# kcdmain
+cd "`cat $HOME/.kcd.newdir`"	# ash does not recognize '~'
+				# The extra enclosing "..." is required
+				# since directory name may contain spaces.

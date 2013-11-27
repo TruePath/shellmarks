@@ -1,0 +1,16 @@
+# kcd.csh.init
+# Must be invoked by "." or "source" command
+
+# Add to PATH environment variable if it is not there
+# This is to avoid unnecessary change to the order of search
+echo ":$PATH:" | grep ':@prefix@/bin:' > /dev/null
+if ($?) then
+	setenv PATH "@prefix@/bin:${PATH}"
+endif
+
+# Setup variables required to run kcd here
+#  setenv LD_LIBRARY_PATH "/blah/blah/blah"
+#  setenv TERMINFO "/blah/blah/blah"
+
+# Install kcd shell function/alias
+eval `"@prefix@"/bin/kcdmain -ics "@prefix@"/bin`

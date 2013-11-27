@@ -1,0 +1,154 @@
+<variablelist>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>--config</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display current configuration (excluding screen 
+attributes) obtained from <filename><replaceable>SYSCONFDIR</replaceable>/kcd.conf</filename> and
+<filename>~/.kcd.conf</filename>.  <replaceable>SYSCONFDIR</replaceable> 
+is the directory given to
+<option>--sysconfdir</option> option during configure, which usually is
+<filename>/etc</filename>, <filename>/usr/etc</filename> or 
+<filename>/usr/local/etc</filename>.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>--configattr</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display current screen attribute 
+configuration.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>--features</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display availability of all features:
+<variablelist>
+<varlistentry>
+<term>
+xterm/rxvt resize
+</term>
+<listitem><para>
+Yes if kcd can redraw itself
+if the size of xterm/rxvt 
+terminal changes.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+mouse support
+</term>
+<listitem><para>
+Yes if kcd can response to
+mouse click.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+default scroll bar
+</term>
+<listitem><para>
+Yes if scroll bar will be
+used.  It can be overridden
+by <command>ScrollBar</command> command in
+configuration file.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+UTF-8 support
+</term>
+<listitem><para>
+Yes if kcd is compiled with
+Unicode UTF-8 support.  A
+Unicode enabled terminal is
+required for proper function.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+d_type speedup
+</term>
+<listitem><para>
+Yes if a faster way to obtain
+information whether a
+directory entry is a file
+or directory is available.
+</para></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-h</arg>
+</cmdsynopsis>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>--help</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display help message.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>--helpinst</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display help for shell alias/function installation.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-v</arg>
+</cmdsynopsis>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>--version</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display version number.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>

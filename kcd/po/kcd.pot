@@ -1,0 +1,787 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Kriang Lerdsuwanakij
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2003-07-12 19:12+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: buffer.cc:36
+msgid ": check_size: possible numerical overflow during type conversion\n"
+msgstr ""
+
+#: conffile.cc:114
+msgid "bad file format - command ignored"
+msgstr ""
+
+#: conffile.cc:120
+msgid "        %$     Command ignored\n"
+msgstr ""
+
+#: conffile.cc:127
+msgid "%$: %$ in `%$' command:\n"
+msgstr ""
+
+#: conffile.cc:135
+msgid "extra characters"
+msgstr ""
+
+#: conffile.cc:140
+msgid "invalid value"
+msgstr ""
+
+#: conffile.cc:145 conffile.cc:422
+msgid "invalid attribute"
+msgstr ""
+
+#: conffile.cc:150
+msgid "invalid color"
+msgstr ""
+
+#: conffile.cc:155
+msgid "ON required"
+msgstr ""
+
+#: conffile.cc:160
+msgid "`=' required"
+msgstr ""
+
+#: conffile.cc:165
+msgid "`\"' required"
+msgstr ""
+
+#: conffile.cc:170
+msgid "only YES or NO is allowed"
+msgstr ""
+
+#: conffile.cc:175
+msgid "non-negative integer required"
+msgstr ""
+
+#: conffile.cc:180
+msgid "blank entry encountered"
+msgstr ""
+
+#: conffile.cc:225
+msgid "number out of range"
+msgstr ""
+
+#: conffile.cc:352
+msgid "Yes\n"
+msgstr ""
+
+#: conffile.cc:354
+msgid "No\n"
+msgstr ""
+
+#: conffile.cc:508
+msgid "cannot skip root directory"
+msgstr ""
+
+#: conffile.cc:1021
+msgid "cannot obtain status for configuration file"
+msgstr ""
+
+#: conffile.cc:1024
+msgid "configuration cannot be a symbolic link"
+msgstr ""
+
+#: conffile.cc:1027
+msgid "configuration file must be a regular file"
+msgstr ""
+
+#: conffile.cc:1030
+msgid "invalid link count for configuration file"
+msgstr ""
+
+#: conffile.cc:1039
+msgid "race condition detected"
+msgstr ""
+
+#: conffile.cc:1043
+msgid "%$: loading configuration from %$\n"
+msgstr ""
+
+#: conffile.cc:1072
+msgid ": missing `]'\n"
+msgstr ""
+
+#: conffile.cc:1082
+msgid ": extra characters after profile name\n"
+msgstr ""
+
+#: conffile.cc:1090
+msgid ": invalid charactors in profile name\n"
+msgstr ""
+
+#: conffile.cc:1125
+msgid ": unrecognized command:\n"
+msgstr ""
+
+#: conffile.cc:1129
+msgid "Error found, program aborted"
+msgstr ""
+
+#: conffile.cc:1142
+msgid "Error found, press Enter key to continue...\n"
+msgstr ""
+
+#: conffile.cc:1180
+msgid "Profile: %$\n"
+msgstr ""
+
+#: cxxlib.cc:45
+msgid ": Check the file BUGREPORT in the package for details\n"
+msgstr ""
+
+#: dirobj.cc:104 dirobj.cc:117 dirtree.cc:65
+msgid ""
+"error in saved directory file\n"
+"Please rebuild it using `kcd -rf'"
+msgstr ""
+
+#: dirtree.cc:159
+msgid "%$: cannot find %$, file will be rebuilt\n"
+msgstr ""
+
+#: dirtree.cc:173 dirtree.cc:245
+msgid "invalid file format in %$"
+msgstr ""
+
+#: dirtree.cc:178 dirtree.cc:250 gentree.cc:1336
+msgid "error reading file %$"
+msgstr ""
+
+#: dirtree.cc:199 dirtree.cc:207
+msgid "%$: %$ is empty, file will be rebuilt\n"
+msgstr ""
+
+#: dirtree.cc:213
+msgid "cannot read file %$"
+msgstr ""
+
+#: dirtree.cc:227
+msgid ""
+"%$: %$ is not compatible with current of version of kcd, file will be "
+"rebuilt\n"
+msgstr ""
+
+#: dirtree.cc:268 gentree.cc:1042 gentree.cc:1301 kcdmain.cc:191 khwin.cc:2311
+msgid "cannot create file %$"
+msgstr ""
+
+#: dirtree.cc:303 gentree.cc:1308
+msgid "error writing file %$"
+msgstr ""
+
+#: dirutil.cc:55
+msgid "error obtaining the user home directory"
+msgstr ""
+
+#: dirutil.cc:80 dirutil.cc:98 dirutil.cc:121 dirutil.cc:152 dirutil.cc:167
+msgid "bad quoting for directory `%$'"
+msgstr ""
+
+#: dirutil.cc:106 dirutil.cc:129
+msgid "error obtaining home directory for user `%$'"
+msgstr ""
+
+#: dirutil.cc:178
+msgid "bad directory `%$'"
+msgstr ""
+
+#: error.h:55
+msgid "unknown error"
+msgstr ""
+
+#: error.h:132
+msgid "bad file format"
+msgstr ""
+
+#: error.h:138
+msgid "input/output is redirected or piped"
+msgstr ""
+
+#: error.h:144
+msgid ""
+"your ncurses library is bad\n"
+"Refer to kcd README file for solution"
+msgstr ""
+
+#: error.h:151
+msgid "file configuration changed"
+msgstr ""
+
+#: error.h:157
+msgid "screen too small"
+msgstr ""
+
+#: error.h:163
+msgid "gz I/O error"
+msgstr ""
+
+#: error.h:169
+msgid "input out of range"
+msgstr ""
+
+#: error.h:175
+msgid "bad multibyte sequence"
+msgstr ""
+
+#: error.h:181
+msgid "seek error"
+msgstr ""
+
+#: gentree.cc:70
+msgid " [unreadable]"
+msgstr ""
+
+#: gentree.cc:71
+msgid " [skipped]"
+msgstr ""
+
+#: gentree.cc:72
+msgid " [outside tree]"
+msgstr ""
+
+#: gentree.cc:73
+msgid " [*]"
+msgstr ""
+
+#: gentree.cc:74
+msgid " [not found]"
+msgstr ""
+
+#: gentree.cc:361
+msgid "%$ %$   Last scan: %$"
+msgstr ""
+
+#: gentree.cc:363 gentree.cc:713
+msgid "%b %e  %H:%M"
+msgstr ""
+
+#: gentree.cc:711
+msgid "%$ %$   Found: %$   Last scan: %$"
+msgstr ""
+
+#: gentree.cc:1014
+msgid "%$: skipping %$ - directory no longer exist\n"
+msgstr ""
+
+#: gentree.cc:1024 gentree.cc:1035
+msgid "no directory change\n"
+msgstr ""
+
+#: gentree.cc:1028
+msgid "cannot find directory containing the string %$"
+msgstr ""
+
+#: gentree.cc:1051
+msgid "change to "
+msgstr ""
+
+#: gentree.cc:1229
+msgid "%$: directory %$ already bookmarked\n"
+msgstr ""
+
+#: gentree.cc:1235
+msgid "%$: cannot find %$ in saved directory tree\n"
+msgstr ""
+
+#: gentree.cc:1251
+msgid ""
+"%$: cannot find %$ in saved directory tree\n"
+"        Directory ignored\n"
+msgstr ""
+
+#: gentree.cc:1361
+msgid "%$: no bookmarks found\n"
+msgstr ""
+
+#: gentree.cc:1445 gentree.cc:1488
+msgid ""
+"%$: cannot determine current directory\n"
+"        Directory ignored"
+msgstr ""
+
+#: gentree.cc:1465 gentree.cc:1508
+msgid ""
+"%$: cannot determine current directory for path %$\n"
+"        Directory ignored"
+msgstr ""
+
+#: kcdmain.cc:74
+msgid " - Kriang's Change Directory\n"
+msgstr ""
+
+#: kcdmain.cc:75
+msgid ""
+"(c) 1996-9,2000-2,2003 Kriang Lerdsuwanakij    Release date: %$\n"
+"\n"
+msgstr ""
+
+#: kcdmain.cc:77
+msgid "%b %e, %Y"
+msgstr ""
+
+#: kcdmain.cc:95
+msgid ""
+"Usage:   %$ [PATTERN]\n"
+"  or:    %$ [OPTION]\n"
+msgstr ""
+
+#: kcdmain.cc:97 kcdmain.cc:121
+msgid "Available options:\n"
+msgstr ""
+
+#: kcdmain.cc:98
+msgid ""
+"     -b [PATTERN]   Display bookmarked directories matching PATTERN\n"
+"                    (default = display all)\n"
+"     -ba [DIR ...]  Bookmark DIR list (default = current directory)\n"
+"     -br [DIR ...]  Remove DIR list bookmark\n"
+"     -B             Use entire tree even a bookmarked match is found\n"
+msgstr ""
+
+#: kcdmain.cc:103
+msgid ""
+"     --config       Display current configuration\n"
+"     --configattr   Display current screen attribute configuration\n"
+"     --features     Display features included during compilation\n"
+"     -h, --help     Display this help\n"
+"     --helpinst     Display help about shell alias/function installation\n"
+msgstr ""
+
+#: kcdmain.cc:108
+msgid "     -p NAME        Use configuration profile NAME\n"
+msgstr ""
+
+#: kcdmain.cc:109
+msgid ""
+"     -r             Rescan directory tree\n"
+"     -rf            Rescan directory tree using full rescan mode\n"
+"     -rp DIR        Rescan part of directory tree beginning at DIR\n"
+"     -rq            Rescan directory tree, do not display progress\n"
+"     -rQ            Rescan directory tree, display progress\n"
+"     -v, --version  Display version number\n"
+"\n"
+msgstr ""
+
+#: kcdmain.cc:120
+msgid "Usage:   eval `%$ [OPTION]`\n"
+msgstr ""
+
+#: kcdmain.cc:122
+msgid ""
+"     -ia            Print command for shell alias installation\n"
+"                    (Works with bash, pdksh, zsh)\n"
+msgstr ""
+
+#: kcdmain.cc:124
+msgid ""
+"     -ic            Print command for shell alias installation\n"
+"                    (Works with tcsh)\n"
+msgstr ""
+
+#: kcdmain.cc:126
+msgid ""
+"     -if            Print command for shell function installation\n"
+"                    (Works with ash)\n"
+msgstr ""
+
+#: kcdmain.cc:128
+msgid ""
+"     -ias DIR,      Same as -ia,-ic or -if but use the specified\n"
+"        -ics DIR,   directory\n"
+"        -ifs DIR\n"
+"\n"
+msgstr ""
+
+#: kcdmain.cc:137
+msgid "     xterm/rxvt resize   : "
+msgstr ""
+
+#: kcdmain.cc:139 kcdmain.cc:147 kcdmain.cc:155 kcdmain.cc:163 kcdmain.cc:171
+msgid "Yes"
+msgstr ""
+
+#: kcdmain.cc:141 kcdmain.cc:149 kcdmain.cc:157 kcdmain.cc:165 kcdmain.cc:173
+msgid "No"
+msgstr ""
+
+#: kcdmain.cc:145
+msgid "     mouse support       : "
+msgstr ""
+
+#: kcdmain.cc:153
+msgid "     default scroll bar  : "
+msgstr ""
+
+#: kcdmain.cc:161
+msgid "     UTF-8 support       : "
+msgstr ""
+
+#: kcdmain.cc:169
+msgid "     d_type speedup      : "
+msgstr ""
+
+#: kcdmain.cc:236
+msgid "invalid IFS environment variable setting"
+msgstr ""
+
+#: kcdmain.cc:346
+msgid "argument not allowed for `-ia'"
+msgstr ""
+
+#: kcdmain.cc:358
+msgid "argument not allowed for `-ic'"
+msgstr ""
+
+#: kcdmain.cc:370
+msgid "argument not allowed for `-if'"
+msgstr ""
+
+#: kcdmain.cc:374 kcdmain.cc:377 kcdmain.cc:381
+msgid "user-specific installation deprecated"
+msgstr ""
+
+#: kcdmain.cc:393
+msgid "one argument required for `-ias'"
+msgstr ""
+
+#: kcdmain.cc:405
+msgid "one argument required for `-ics'"
+msgstr ""
+
+#: kcdmain.cc:417
+msgid "one argument required for `-ifs'"
+msgstr ""
+
+#: kcdmain.cc:425
+msgid "one argument required for `-p'"
+msgstr ""
+
+#: kcdmain.cc:435
+msgid "too many arguments for `-b'"
+msgstr ""
+
+#: kcdmain.cc:477
+msgid "argument required for `-rp'"
+msgstr ""
+
+#: kcdmain.cc:480
+msgid "`-rpp' not allowed"
+msgstr ""
+
+#: kcdmain.cc:483
+msgid "argument for `-rp' cannot be empty"
+msgstr ""
+
+#: kcdmain.cc:486
+msgid "multiple `-rp' not allowed when current directory cannot be determined"
+msgstr ""
+
+#: kcdmain.cc:492
+msgid "unknown specifier for `-r' option"
+msgstr ""
+
+#: kcdmain.cc:501
+msgid "unknown option"
+msgstr ""
+
+#: kcdmain.cc:509
+msgid "too many arguments"
+msgstr ""
+
+#: kcdmain.cc:544
+msgid ": not enough memory\n"
+msgstr ""
+
+#: kcdmain.cc:554
+msgid ": unknown exception\n"
+msgstr ""
+
+#: khdoc.cc:149 khdoc.cc:157 khdoc.cc:165
+msgid "Content:\n"
+msgstr ""
+
+#: khdoc.cc:171
+msgid "%$ tag inside %$ tag at line %$\n"
+msgstr ""
+
+#: khdoc.cc:176
+msgid "nested %$ tag at line %$\n"
+msgstr ""
+
+#: khdoc.cc:181
+msgid "%$ without %$ at line %$\n"
+msgstr ""
+
+#: khdoc.cc:186
+msgid "%$ needed %$ at line %$\n"
+msgstr ""
+
+#: khdoc.cc:191
+msgid "unexpected end of file inside %$ at line %$\n"
+msgstr ""
+
+#: khdoc.cc:196
+msgid "cannot find %$ at line %$\n"
+msgstr ""
+
+#: khdoc.cc:356
+msgid "cannot read file %$ or %$"
+msgstr ""
+
+#: khdoc.cc:405
+msgid "cannot read file stream"
+msgstr ""
+
+#: khdoc.cc:454
+msgid "error occurs while reading file"
+msgstr ""
+
+#: khdoc.cc:541
+msgid "<A ...>, <B> or <I>"
+msgstr ""
+
+#: khdoc.cc:570
+msgid "***"
+msgstr ""
+
+#: khdoc.cc:622
+msgid "<A ...>"
+msgstr ""
+
+#: khdoc.cc:632
+msgid "<A NAME=\"...\">"
+msgstr ""
+
+#: khdoc.cc:636 khdoc.cc:878 khdoc.cc:1687
+msgid "<A HREF=...>"
+msgstr ""
+
+#: khdoc.cc:640
+msgid "<A CALL=\"...\">"
+msgstr ""
+
+#: khdoc.cc:649 khdoc.cc:659
+msgid "`='"
+msgstr ""
+
+#: khdoc.cc:672
+msgid "`\"' or ``'"
+msgstr ""
+
+#: khdoc.cc:679
+msgid "`\"'"
+msgstr ""
+
+#: khdoc.cc:1138 khdoc.cc:1179 khdoc.cc:1706
+msgid "`>'"
+msgstr ""
+
+#: khdoc.cc:1151
+msgid "cannot specify title more than once"
+msgstr ""
+
+#: khdoc.cc:1166
+msgid "`-->'"
+msgstr ""
+
+#: khdoc.cc:1208
+msgid "`;'"
+msgstr ""
+
+#: khdoc.cc:1218
+msgid "error in escape"
+msgstr ""
+
+#: khdoc.cc:1222
+msgid "character code too large"
+msgstr ""
+
+#: khdoc.cc:1574
+msgid "unexpected end of file, missing </A>"
+msgstr ""
+
+#: khdoc.cc:1578
+msgid "unexpected end of file, missing </PRE>"
+msgstr ""
+
+#: khdoc.cc:1592
+msgid ""
+"hypertext size calculation not match actual hypertext parse\n"
+"Number of row: %$ (calc.) %$ (parse)"
+msgstr ""
+
+#: khdoc.cc:1750
+msgid ""
+"no <A HREF=...> or <A CALL=\"...\"> tags present\n"
+"Do not use the `-l' option for this file"
+msgstr ""
+
+#: khdoc.cc:1773 khwin.cc:721
+msgid "cannot find <A NAME=\"%$\">"
+msgstr ""
+
+#: khwin.cc:234
+msgid "Screen too small - please resize to make it bigger."
+msgstr ""
+
+#: khwin.cc:707
+msgid ""
+"no <A HREF=...> tags present\n"
+"Do not use the `-c' option for this file"
+msgstr ""
+
+#: scandir.cc:48 scandir.cc:52
+msgid "Time spent: %$ (%$)\n"
+msgstr ""
+
+#: scandir.cc:49
+msgid "%H:%M:%S"
+msgstr ""
+
+#: scandir.cc:53
+msgid "%M:%S"
+msgstr ""
+
+#: scandir.cc:60
+msgid ""
+"%$: cannot find directory %$ as specified in `StartDir' command.  Command "
+"ignored\n"
+msgstr ""
+
+#: scandir.cc:68
+msgid ": cannot change to directory %$ - %$\n"
+msgstr ""
+
+#: scandir.cc:158
+msgid "Resolving symbolic links"
+msgstr ""
+
+#: scandir.cc:298
+msgid "full scan mode"
+msgstr ""
+
+#: scandir.cc:329
+msgid ": Invalid directory tree state\n"
+msgstr ""
+
+#: scandir.cc:668
+msgid "smart scan mode"
+msgstr ""
+
+#: scandir.cc:684
+msgid "cannot scan directory %$"
+msgstr ""
+
+#: scandir.cc:691
+msgid "cannot obtain full directory name for %$"
+msgstr ""
+
+#: scandir.cc:697
+msgid "%$ is either a special directory, in `SkipDir' or not in `StartDir'"
+msgstr ""
+
+#: scandir.cc:745
+msgid "partial scan mode"
+msgstr ""
+
+#: statwin.cc:36
+msgid "..."
+msgstr ""
+
+#: statwin.cc:266
+msgid "F9=Switch display"
+msgstr ""
+
+#: statwin.cc:271
+msgid "Keys (1):  Arrows,PgUp,PgDn,Home,End=Move cursor  Enter,Space=Select"
+msgstr ""
+
+#: statwin.cc:273
+msgid "Keys (2):  ^R,F8=Repaint screen  F9=Switch display  ^C,F10=Quit"
+msgstr ""
+
+#: statwin.cc:275
+msgid "Keys (3):  Keypad Center=Center highlight  `,',`.'=Pan left/right"
+msgstr ""
+
+#: statwin.cc:279
+msgid "Keys (1v):  Arrows,PgUp,PgDn,Home,End=Move cursor  Enter,Space=Select"
+msgstr ""
+
+#: statwin.cc:281
+msgid "Keys (2v):  ^L,F8=Repaint screen  F9=Switch display  ^C,F10=Quit"
+msgstr ""
+
+#: statwin.cc:283
+msgid "Keys (3v):  Keypad Center=Center highlight  `,',`.'=Pan left/right"
+msgstr ""
+
+#: statwin.cc:287
+msgid "Keys (1e):  Arrows,PgUp,PgDn,Home,End=Move cursor  Enter,Space=Select"
+msgstr ""
+
+#: statwin.cc:289
+msgid "Keys (2e):  F8=Repaint screen  F9=Switch display  C-c,F10=Quit"
+msgstr ""
+
+#: statwin.cc:291
+msgid "Keys (3e):  Keypad Center=Center highlight  `,',`.'=Pan left/right"
+msgstr ""
+
+#: statwin.cc:351
+msgid "Keys (4):  A-Z,a-z,0-9=Enter find mode"
+msgstr ""
+
+#: statwin.cc:352 statwin.cc:365
+msgid "Keys in find mode:  Up/Dn=Prev/next match  TAB=Exit find  ENTER=Select"
+msgstr ""
+
+#: statwin.cc:354 statwin.cc:360
+msgid "^F:  8=Repaint screen  9=Switch display  0=Quit"
+msgstr ""
+
+#: statwin.cc:358
+msgid "Keys (4v):  /,?=Enter find mode"
+msgstr ""
+
+#: statwin.cc:359
+msgid "Keys in find mode:  TAB=Exit find  ENTER=Select"
+msgstr ""
+
+#: statwin.cc:364
+msgid "Keys (4e):  C-s,C-r=Enter find mode"
+msgstr ""
+
+#: statwin.cc:367
+msgid "C-f:  8=Repaint screen  9=Switch display  0=Quit"
+msgstr ""
+
+#: statwin.cc:381
+msgid "Find: ["
+msgstr ""
+
+#: statwin.cc:382
+msgid "]  "
+msgstr ""
+
+#: statwin.cc:383
+msgid "Ovr"
+msgstr ""
+
+#: statwin.cc:384
+msgid "Ins"
+msgstr ""

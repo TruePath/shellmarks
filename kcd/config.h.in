@@ -1,0 +1,572 @@
+/* config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define if you have d_type in struct dirent. */
+#undef CLIB_HAVE_D_TYPE
+
+/* Define if you have iswprint in <wctype.h> header file. */
+#undef CLIB_HAVE_ISWPRINT
+
+/* Define if you have mbrtowc in some header file. */
+#undef CLIB_HAVE_MBRTOWC
+
+/* Define if you have mbsrtowcs in some header file. */
+#undef CLIB_HAVE_MBSRTOWCS
+
+/* Define if you have mbstowcs in some header file. */
+#undef CLIB_HAVE_MBSTOWCS
+
+/* Define if you have mbtowc in some header file. */
+#undef CLIB_HAVE_MBTOWC
+
+/* Define if you have regex library. */
+#undef CLIB_HAVE_REGEX
+
+/* Define if you have strcasecmp in <string.h> header file. */
+#undef CLIB_HAVE_STRCASECMP
+
+/* Define if you have strncasecmp in <string.h> header file. */
+#undef CLIB_HAVE_STRNCASECMP
+
+/* Define if you have wcwidth in <wchar.h> header file. */
+#undef CLIB_HAVE_WCWIDTH
+
+
+#if defined(CLIB_HAVE_WCWIDTH) && defined(CLIB_HAVE_ISWPRINT) \
+    && defined(CLIB_HAVE_MBTOWC) && defined(CLIB_HAVE_MBRTOWC) \
+    && defined(CLIB_HAVE_MBSTOWCS) && defined(CLIB_HAVE_MBSRTOWCS)
+# define USE_UTF8_MODE
+#endif
+
+
+/* Define to 1 if the `closedir' function returns void instead of `int'. */
+#undef CLOSEDIR_VOID
+
+/* Define if exception handling is on by default. */
+#undef CXX__DEFAULT_EXCEPTION
+
+/* Define if all C++ and C library header is available. */
+#undef CXX__HAVE_ALL_HEADER
+
+/* Define if C++ bool is found. */
+#undef CXX__HAVE_BOOL
+
+/* Define if header algorithm is available. */
+#undef CXX__HAVE_HEADER_algorithm
+
+/* Define if header bitset is available. */
+#undef CXX__HAVE_HEADER_bitset
+
+/* Define if header cassert is available. */
+#undef CXX__HAVE_HEADER_cassert
+
+/* Define if header cctype is available. */
+#undef CXX__HAVE_HEADER_cctype
+
+/* Define if header cerrno is available. */
+#undef CXX__HAVE_HEADER_cerrno
+
+/* Define if header cfloat is available. */
+#undef CXX__HAVE_HEADER_cfloat
+
+/* Define if header ciso646 is available. */
+#undef CXX__HAVE_HEADER_ciso646
+
+/* Define if header climits is available. */
+#undef CXX__HAVE_HEADER_climits
+
+/* Define if header clocale is available. */
+#undef CXX__HAVE_HEADER_clocale
+
+/* Define if header cmath is available. */
+#undef CXX__HAVE_HEADER_cmath
+
+/* Define if header complex is available. */
+#undef CXX__HAVE_HEADER_complex
+
+/* Define if header csetjmp is available. */
+#undef CXX__HAVE_HEADER_csetjmp
+
+/* Define if header csignal is available. */
+#undef CXX__HAVE_HEADER_csignal
+
+/* Define if header cstdarg is available. */
+#undef CXX__HAVE_HEADER_cstdarg
+
+/* Define if header cstddef is available. */
+#undef CXX__HAVE_HEADER_cstddef
+
+/* Define if header cstdio is available. */
+#undef CXX__HAVE_HEADER_cstdio
+
+/* Define if header cstdlib is available. */
+#undef CXX__HAVE_HEADER_cstdlib
+
+/* Define if header cstring is available. */
+#undef CXX__HAVE_HEADER_cstring
+
+/* Define if header ctime is available. */
+#undef CXX__HAVE_HEADER_ctime
+
+/* Define if header cwchar is available. */
+#undef CXX__HAVE_HEADER_cwchar
+
+/* Define if header cwctype is available. */
+#undef CXX__HAVE_HEADER_cwctype
+
+/* Define if header deque is available. */
+#undef CXX__HAVE_HEADER_deque
+
+/* Define if header exception is available. */
+#undef CXX__HAVE_HEADER_exception
+
+/* Define if header fstream is available. */
+#undef CXX__HAVE_HEADER_fstream
+
+/* Define if header functional is available. */
+#undef CXX__HAVE_HEADER_functional
+
+/* Define if header iofwd is available. */
+#undef CXX__HAVE_HEADER_iofwd
+
+/* Define if header iomanip is available. */
+#undef CXX__HAVE_HEADER_iomanip
+
+/* Define if header ios is available. */
+#undef CXX__HAVE_HEADER_ios
+
+/* Define if header iostream is available. */
+#undef CXX__HAVE_HEADER_iostream
+
+/* Define if header istream is available. */
+#undef CXX__HAVE_HEADER_istream
+
+/* Define if header iterator is available. */
+#undef CXX__HAVE_HEADER_iterator
+
+/* Define if header limits is available. */
+#undef CXX__HAVE_HEADER_limits
+
+/* Define if header list is available. */
+#undef CXX__HAVE_HEADER_list
+
+/* Define if header locale is available. */
+#undef CXX__HAVE_HEADER_locale
+
+/* Define if header map is available. */
+#undef CXX__HAVE_HEADER_map
+
+/* Define if header memory is available. */
+#undef CXX__HAVE_HEADER_memory
+
+/* Define if header new is available. */
+#undef CXX__HAVE_HEADER_new
+
+/* Define if header numeric is available. */
+#undef CXX__HAVE_HEADER_numeric
+
+/* Define if header ostream is available. */
+#undef CXX__HAVE_HEADER_ostream
+
+/* Define if header queue is available. */
+#undef CXX__HAVE_HEADER_queue
+
+/* Define if header set is available. */
+#undef CXX__HAVE_HEADER_set
+
+/* Define if header sstream is available. */
+#undef CXX__HAVE_HEADER_sstream
+
+/* Define if header stack is available. */
+#undef CXX__HAVE_HEADER_stack
+
+/* Define if header stdexcept is available. */
+#undef CXX__HAVE_HEADER_stdexcept
+
+/* Define if header streambuf is available. */
+#undef CXX__HAVE_HEADER_streambuf
+
+/* Define if header string is available. */
+#undef CXX__HAVE_HEADER_string
+
+/* Define if header typeinfo is available. */
+#undef CXX__HAVE_HEADER_typeinfo
+
+/* Define if header utility is available. */
+#undef CXX__HAVE_HEADER_utility
+
+/* Define if header valarray is available. */
+#undef CXX__HAVE_HEADER_valarray
+
+/* Define if header vector is available. */
+#undef CXX__HAVE_HEADER_vector
+
+/* Define if namespace is available. */
+#undef CXX__HAVE_NAMESPACE
+
+/* Define if typename is available. */
+#undef CXX__HAVE_TYPENAME
+
+
+#ifdef CXX__HAVE_TYPENAME
+#  define TYPENAME typename
+#else
+#  define TYPENAME
+#endif
+  
+
+/* Define if header algorithm is available. */
+#undef CXX__HEADER_algorithm
+
+/* Define if header bitset is available. */
+#undef CXX__HEADER_bitset
+
+/* Define if header cassert is available. */
+#undef CXX__HEADER_cassert
+
+/* Define if header cctype is available. */
+#undef CXX__HEADER_cctype
+
+/* Define if header cerrno is available. */
+#undef CXX__HEADER_cerrno
+
+/* Define if header cfloat is available. */
+#undef CXX__HEADER_cfloat
+
+/* Define if header ciso646 is available. */
+#undef CXX__HEADER_ciso646
+
+/* Define if header climits is available. */
+#undef CXX__HEADER_climits
+
+/* Define if header clocale is available. */
+#undef CXX__HEADER_clocale
+
+/* Define if header cmath is available. */
+#undef CXX__HEADER_cmath
+
+/* Define if header complex is available. */
+#undef CXX__HEADER_complex
+
+/* Define if header csetjmp is available. */
+#undef CXX__HEADER_csetjmp
+
+/* Define if header csignal is available. */
+#undef CXX__HEADER_csignal
+
+/* Define if header cstdarg is available. */
+#undef CXX__HEADER_cstdarg
+
+/* Define if header cstddef is available. */
+#undef CXX__HEADER_cstddef
+
+/* Define if header cstdio is available. */
+#undef CXX__HEADER_cstdio
+
+/* Define if header cstdlib is available. */
+#undef CXX__HEADER_cstdlib
+
+/* Define if header cstring is available. */
+#undef CXX__HEADER_cstring
+
+/* Define if header ctime is available. */
+#undef CXX__HEADER_ctime
+
+/* Define if header cwchar is available. */
+#undef CXX__HEADER_cwchar
+
+/* Define if header cwctype is available. */
+#undef CXX__HEADER_cwctype
+
+/* Define if header deque is available. */
+#undef CXX__HEADER_deque
+
+/* Define if header exception is available. */
+#undef CXX__HEADER_exception
+
+/* Define if header fstream is available. */
+#undef CXX__HEADER_fstream
+
+/* Define if header functional is available. */
+#undef CXX__HEADER_functional
+
+/* Define if header iofwd is available. */
+#undef CXX__HEADER_iofwd
+
+/* Define if header iomanip is available. */
+#undef CXX__HEADER_iomanip
+
+/* Define if header ios is available. */
+#undef CXX__HEADER_ios
+
+/* Define if header iostream is available. */
+#undef CXX__HEADER_iostream
+
+/* Define if header istream is available. */
+#undef CXX__HEADER_istream
+
+/* Define if header iterator is available. */
+#undef CXX__HEADER_iterator
+
+/* Define if header limits is available. */
+#undef CXX__HEADER_limits
+
+/* Define if header list is available. */
+#undef CXX__HEADER_list
+
+/* Define if header locale is available. */
+#undef CXX__HEADER_locale
+
+/* Define if header map is available. */
+#undef CXX__HEADER_map
+
+/* Define if header memory is available. */
+#undef CXX__HEADER_memory
+
+/* Define if header new is available. */
+#undef CXX__HEADER_new
+
+/* Define if header numeric is available. */
+#undef CXX__HEADER_numeric
+
+/* Define if header ostream is available. */
+#undef CXX__HEADER_ostream
+
+/* Define if header queue is available. */
+#undef CXX__HEADER_queue
+
+/* Define if header set is available. */
+#undef CXX__HEADER_set
+
+/* Define if header sstream is available. */
+#undef CXX__HEADER_sstream
+
+/* Define if header stack is available. */
+#undef CXX__HEADER_stack
+
+/* Define if header stdexcept is available. */
+#undef CXX__HEADER_stdexcept
+
+/* Define if header streambuf is available. */
+#undef CXX__HEADER_streambuf
+
+/* Define if header string is available. */
+#undef CXX__HEADER_string
+
+/* Define if header typeinfo is available. */
+#undef CXX__HEADER_typeinfo
+
+/* Define if header utility is available. */
+#undef CXX__HEADER_utility
+
+/* Define if header valarray is available. */
+#undef CXX__HEADER_valarray
+
+/* Define if header vector is available. */
+#undef CXX__HEADER_vector
+
+/* Define if using namespace std; is required by the library. */
+#undef CXX__LIB_NEED_USING_STD
+
+
+#ifdef CXX__LIB_NEED_USING_STD
+# define USING_NAMESPACE_STD using namespace std
+#else
+# define USING_NAMESPACE_STD
+#endif
+  
+
+/* Define if guided declaration is used. */
+#undef CXX__NO_GUIDE_DECL
+
+
+#ifndef CXX__NO_GUIDE_DECL
+#  define LEFTRIGHT
+#else
+#  define LEFTRIGHT <>
+#endif
+  
+
+/* Define if string::erase(...) is available. */
+#undef CXX__STRING_ERASE
+
+/* Define if I/O stream operators for string is available. */
+#undef CXX__STRING_IO
+
+/* Define to 1 if translation of program messages to the user's native
+   language is requested. */
+#undef ENABLE_NLS
+
+/* Define if the GNU dcgettext() function is already present or preinstalled.
+   */
+#undef HAVE_DCGETTEXT
+
+/* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_DIRENT_H
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* Define if FHS is used. */
+#undef HAVE_FHS
+
+/* Define to 1 if your system has a working POSIX `fnmatch' function. */
+#undef HAVE_FNMATCH
+
+/* Define if the GNU gettext() function is already present or preinstalled. */
+#undef HAVE_GETTEXT
+
+/* Define if you have the iconv() function. */
+#undef HAVE_ICONV
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the <limits.h> header file. */
+#undef HAVE_LIMITS_H
+
+/* Define to 1 if you have the <malloc.h> header file. */
+#undef HAVE_MALLOC_H
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the <ndir.h> header file, and it defines `DIR'. */
+#undef HAVE_NDIR_H
+
+/* Define if you have resizeterm in <curses.h> header file. */
+#undef HAVE_RESIZETERM
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strftime' function. */
+#undef HAVE_STRFTIME
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_SYS_DIR_H
+
+/* Define to 1 if you have the <sys/ioctl.h> header file. */
+#undef HAVE_SYS_IOCTL_H
+
+/* Define to 1 if you have the <sys/ndir.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_SYS_NDIR_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have the <wchar.h> header file. */
+#undef HAVE_WCHAR_H
+
+/* Define if you enable mouse support in configure. */
+#undef NCURSESAC_ENABLE_MOUSE
+
+/* Define if you have mousemask in <curses.h> header file. */
+#undef NCURSESAC_HAVE_MOUSEMASK
+
+/* Define to curses.h header. */
+#undef NCURSESAC_INCLUDE
+
+/* Define if you have new attr_get/attr_set in <curses.h> header file. */
+#undef NCURSESAC_NEW_ATTR_GET_ATTR_SET
+
+/* Define if curses.h is in ncurses and ncursesw subdirectory. */
+#undef NCURSESAC_NEW_INCLUDE
+
+/* Define if wide char support of ncurses is used. */
+#undef NCURSESAC_WIDE
+
+/* Define to the name of the distribution. */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Define to the version of the distribution. */
+#undef VERSION
+
+/* Define if gzeof is available. */
+#undef ZLIBAC_HAVE_GZEOF
+
+/* Define if gzgetc is available. */
+#undef ZLIBAC_HAVE_GZGETC
+
+/* Define if gzgets is available. */
+#undef ZLIBAC_HAVE_GZGETS
+
+/* Define if gzprintf is available. */
+#undef ZLIBAC_HAVE_GZPRINTF
+
+/* Define if gzputc is available. */
+#undef ZLIBAC_HAVE_GZPUTC
+
+/* Define if gzputs is available. */
+#undef ZLIBAC_HAVE_GZPUTS
+
+/* Define if extern "C" is required for including <zlib.h> in C++ programs */
+#undef ZLIBAC_NEED_EXTERN_C
+
+/* Define to `int' if <sys/types.h> doesn't define. */
+#undef gid_t
+
+/* Define to `int' if <sys/types.h> does not define. */
+#undef mode_t
+
+/* Define to `long int' if <sys/types.h> does not define. */
+#undef off_t
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef size_t
+
+/* Define to `int' if <sys/types.h> doesn't define. */
+#undef uid_t
+
+
+/* For gettext */
+#include <libintl.h>
+#define _(str)	gettext(str)
+#define N_(str)	str
+
+/* Disable features in khdoc.cc */
+#define TRIM_NO_DOC_FILE
+#define TRIM_NO_DOC_STREAM
+#define TRIM_NO_HEADER
+#define TRIM_NO_EXTRA_ATTRIB
+#define TRIM_NO_INDENT
+#define TRIM_NO_RULE
+#define TRIM_NO_LATIN
+#define TRIM_NO_NUM
+#define TRIM_NO_CHECK
+

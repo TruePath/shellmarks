@@ -1,0 +1,91 @@
+<sect1><title>Directory Tree Window</title>
+<para>
+The directory tree window appears when you type kcd without any
+other parameter.  Following are the meaning of different colors and symbols
+used to display a directory in the tree.
+</para>
+
+<variablelist>
+<varlistentry>
+<term>
+Green (color console) or underlined (B&amp;W console)
+</term>
+<listitem><para>
+Accessible normal directories.  You can move the highlight
+bar and press Enter to exit kcd and jump to this directory.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+Yellow (color console) or underlined bold (B&amp;W console)
+</term>
+<listitem><para>
+Accessible symbolic link.  If the link points inside the
+directory tree, selecting this directory will move to
+the linked directory while remaining in the directory tree
+window.  On the other hand, if it points outside, selecting
+it will exit kcd and jump to the target directory.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+Gray (color console) or normal (B&amp;W console)
+</term>
+<listitem><para>
+Inaccessible directory.  You don't have permission to change
+into this directory.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+[skipped]
+</term>
+<listitem><para>
+Directory skipped from scanning so that its subdirectories
+are not displayed.  <filename>/dev</filename> is always skipped since its
+content is really entry points for kernel drivers and this
+takes very long time to scan.  <filename>/proc</filename> is also skipped due to
+continuously changing content.  You can configure other
+directories to skip using <command>SkipDir</command> setting.  See 
+`Configuration File' section below for more information.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+[*]
+</term>
+<listitem><para>
+Directory is not currently present in the saved file.
+They are added automatically to the screen when current
+directory is not in the file.  As of the current version of
+kcd, added directory are not written to file.  To update
+your directory to disk, you have to rescan directory.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+[unreadable]
+</term>
+<listitem><para>
+You don't have either read permission to display the
+content or execute permission to change to this directory.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+[outside tree]
+</term>
+<listitem><para>
+This is a symbolic link that points outside saved directory
+tree.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>

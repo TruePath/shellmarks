@@ -1,0 +1,220 @@
+Installation Guide for kcd
+==========================
+
+System requirement for kcd:
+===========================
+You have to install these software before process with kcd installation
+procedure.
+
+- ncurses 4.2 (or newer).
+- zlib 1.0.4 (or newer).
+- gcc and g++ version 3.0 or newer together with libstdc++.
+
+If you don't have root access to install ncurses or zlib, just build the 
+static library and put header files in ../include and libraries in
+../lib relative to kcd source files.  For example if kcd source directory 
+is ~/tmp/kcd-x.y.z, put then in ~/tmp/include and ~/tmp/lib.
+kcd will automatically recognize the files and use them instead of the
+global ones.
+
+If you are installing ncurses to shared location, you must use the 
+option `--with-shared' in ncurses `configure' command.
+
+
+kcd Installation Procedure:
+===========================
+
+Decide whether you want to install kcd for every user in your system
+(which will be referred to as `system-wide' installation) or only for
+your account only (will be refereed to as `user-specific'
+installation).   The latter is useful if you do not have root access.
+
+
+kcd Installation Procedure:
+===========================
+
+By default kcd will be installed in
+ - `/usr/bin'		if former kcd installation was in /usr/bin
+ - `/usr/local/bin'	otherwise
+
+Type `./configure' (do not type the enclosing quotes) if you want 
+to install kcd in the default directory shown above.  To override
+the destination directory to `PREFIX/bin', add the `--prefix=PREFIX'
+option to configure.  For example, if you want to install to
+`/usr/bin', type `./configure --prefix=/usr'.
+
+Note:  Avoid directory name containing space or special characters
+as the destination directory.
+
+There are several options that can be fine tuned for other directories.
+Default values for these options may vary depending on whether the FHS
+mode for directory structure is used.
+
+ --sysconfdir=DIR	Directory for shared configuration file.
+
+			Default value:
+				/etc		Non-FHS, FHS
+
+				/etc/PREFIX	FHS when PREFIX begins with
+						/opt/...
+
+			Note: If you do not have root access and have to
+			install inside your home directory, you will have
+			to set --sysconfdir to somewhere inside your home
+			directory as well.
+
+ --mandir=DIR		Base directory for man pages.  Man pages will be
+			installed in MANDIR/man1.
+
+			Default value:
+				PREFIX/man	Non-FHS
+
+				PREFIX/share/en_US/man	   FHS (depending
+			     or PREFIX/share/en/man	   on which one
+			     or PREFIX/share/man	   is present in
+							   the system)
+
+
+ --datadir=DIR		Base directory for translated messages.  Message
+			files will be installed in directories inside 
+			DATADIR/locale.
+
+			Default value:
+				PREFIX/share	Both FHS and non-FHS
+Other configure options:
+
+ --enable-wide-chars	Include wide char support.  This requires specially
+			compiled version of ncurses.  Read the file UNICODE 
+			for more information about this support.
+
+ --disable-mouse	Disable mouse handling in kcd.
+
+ --disable-nls		Do not use message translation.
+
+ --disable-fhs		Do not install using directories introduced in FHS.
+			FHS version 2.1 is used here.
+
+ --with-static-ncurses	Link with static version of ncurses library.  It may
+			be useful if you built a new version of ncurses
+			library but forget to create the shared one.
+
+ --with-included-gettext	Use included gettext functions instead of
+				ones already installed in your system.
+				Useful on platform without glibc.
+
+ --with-catgets		Use catgets message system.  It's unlikely that 
+			you'll need this option.
+
+Create kcdmain executable by typing `make'.  If you have any error during 
+compiling the program, refer to the Troubleshooting Section at the end of 
+this file.
+
+If you do not want to keep debugging information, type `make strip'.
+
+Type `make install'.  make will automatically install the required 
+executable files to PREFIX/bin.
+
+If the directory `SYSCONFDIR/profile.d' exists, `kcd.sh.init' is
+automatically copied to `SYSCONFDIR/profile.d/kcd.sh' and `kcd.csh.init'
+to `SYSCONFDIR/profile.d/kcd.csh'.  Otherwise `kcd.sh.init' and 
+`kcd.csh.init' are copied to `SYSCONFDIR'.
+
+Note:  If you have not previously installed kcd, running the 'kcd-inst'
+program (you may need to cd into the directory containing 'kcd-inst' first)
+will add commands to your shell startup files, such as `~/.bashrc',
+so that kcd becomes accessible.  You should also leave the string `For kcd' 
+inside these files intact.  The string is used as a marker so that any 
+future kcd installation will not touch these files again.
+
+
+Creating kcd Configuration Files
+================================
+
+kcd uses its default parameters when no configuration files are found.
+You can find more information about configuration commands in the README
+file.  The following instructions are provided as an example to jump
+start kcd.
+
+If you want to skip some directories from being scanned and displayed, 
+create `SYSCONF/kcd.conf' (that effects all users) or a private `.kcd.conf'
+in your home directory (that effects only your account).   Following is a 
+sample content of such file:
+
+	SkipDir = "/mnt/cdrom"
+	SkipDir = "/mnt/c"
+
+Here subdirectories inside `/mnt/cdrom' and `/mnt/c' are not scanned and
+stored.  Note that `/dev' and `/proc' are always treated as special
+directories and are automatically skipped even when it is not specified
+in `/etc/kcd.conf' or `.kcd.conf'.
+
+
+Running kcd for the First Time
+==============================
+
+If you have not previously installed kcd, running `kcd-inst' program
+will add commands to your shell startup files (such as `~/.bashrc')
+so that kcd is accessible.  You should also leave the string `For kcd' 
+inside these files intact.  The string is used as a marker so that any 
+future kcd installation will recognize this.  If, in the future, you
+decide to install newer kcd in a different directory, `kcd-inst' will
+update commands in startup files to use the new directory instead.  
+
+Logout and login again.  Type `kcd' at your prompt.  You should see now a 
+graphical display of directory tree.   kcd may have to scan all directories 
+(except the ones specified in the configuration) in your system before
+displaying this screen.   Press F10 or Ctrl-C to exit.
+
+If you want to rescan directory to reflect changes at any time later, just 
+type `kcd -r' (normal mode) or `kcd -rq' (for quiet mode).
+
+
+Troubleshooting
+===============
+
+- Compilation fails
+
+	One common problem is that ncurses shared library is old compare to 
+static library.  That because you forgot use the option `--with-shared' in 
+ncurses `configure' command.  Follow the steps below to force kcd to be 
+linked to static library.
+
+	If `libncurses.a' is in either `/usr/local/lib' or `/usr/lib', 
+	run configure with the option `--with-static-ncurses' added to 
+	configure command.  Note that configure looks for libncurses.a in 
+	/usr/local/lib before /usr/lib.
+
+	Otherwise run configure with the option `--with-static-ncurses'
+	and specify the directory name that contains libncurses.a as an 
+	argument.  For example, when your ncurses static library is in 
+	/mydir/lib, type
+
+		./configure --with-static-ncurses=/mydir/lib
+
+- During login, it cannot find one of the libraries used by kcd
+
+	If you are using csh or tcsh, look for one of the following files:
+
+		/etc/kcd.csh.init, /etc/profile.d/kcd.csh
+
+	and modify this file to set the environment variable 
+	LD_LIBRARY_PATH to the directory containing the libraries.
+
+	If you are using other shells, look for one of the following files
+	instead:
+
+		/etc/kcd.sh.init, /etc/profile.d/kcd.sh
+
+- When running kcd, it cannot find terminfo database or open the terminal
+
+	If you are using csh or tcsh, look for one of the following files:
+
+		/etc/kcd.csh.init, /etc/profile.d/kcd.csh
+
+	and modify this file to set the environment variable 
+	TERMINFO to the directory containing the terminfo database.
+
+	If you are using other shells, look for one of the following files
+	instead:
+
+		/etc/kcd.sh.init, /etc/profile.d/kcd.sh

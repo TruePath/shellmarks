@@ -1,0 +1,71 @@
+Unicode Support in kcd
+======================
+
+Currently kcd support the following Unicode features:
+
+- All Unicode characters that is not bidirectional text.  Combining
+  characters are tested.  Double width characters need some further
+  testing.
+- UTF-8 keyboard input and screen output.
+- UTF-8 directory names.
+
+
+To enable Unicode support in kcd, you need UTF-8 version of fonts, xterm,
+ncurses and glibc.  libutf8 can be used instead of the UTF-8 supported
+version of glibc.
+
+Note: kcd built with Unicode support works with both normal (non Unicode)
+      and UTF-8 (Unicode) xterm's.  But the screen display is somewhat
+      slower under normal xterm than that without Unicode support
+      due to extra processing needed in ncurses library.
+
+Building kcd with Unicode Support
+=================================
+
+1. Obtain Unicode font if you don't have one.  The UTF-8 and Unicode FAQ
+   page at http://www.cl.cam.ac.uk/~mgk25/unicode.html contains links to
+   download locations for several fonts.
+
+2. For xfree 4.0 or newer, the default xterm is compiled with builtin UTF-8
+   support.
+
+   For older versions you have to build it yourself.
+   Obtain xterm from http://dickey.his.com/xterm/xterm.html
+   Build with option `--enable-wide-chars' given to the configure script.
+
+3. Obtain ncurses version 5.3 or newer.  Build ncurses with option
+   `--enable-widec' given to the configure script.  You could put the
+   include files and libraries in the directories ../include and ../lib
+   respectively to avoid messing up with other ncurses applications.
+
+4. If your system comes with glibc 2.2 or later, you do not need this step.
+   Otherwise obtain libutf8 from
+   http://clisp.cons.org/~haible/packages-libutf8.html
+
+5. Run kcd's configure with option `--enable-wide-chars', build and
+   install kcd.
+
+6. Run xterm with option
+
+	xterm -u8 -fn FONT
+
+   where FONT should be substituted with your Unicode font.
+
+7. Set environment variable LC_ALL as below (in case of US English)
+
+	export LC_ALL=en_US.UTF-8
+
+   If you are using UTF-8 support from libutf8, add the following
+   environment variable
+
+	export LD_PRELOAD=.../libutf8_plug.so	# Substitute ...
+						# with actual dir.
+
+   Then run kcd.
+
+   To check whether Unicode is working, look at the arrows at the end of
+   any scroll bar.  When in Unicode mode, real arrow characters are used
+   instead of just ASCII characters (<, >, ^ and v) or triangle symbols.
+
+   To check whether gettext is working, run kcd -h.  A nice closing quote
+   should appear in place of the ASCII ' in the word Kriang's.

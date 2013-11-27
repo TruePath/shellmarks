@@ -1,0 +1,153 @@
+<variablelist>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display directory tree and allow you to choose the 
+directory you would like to change to.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=opt>-B</arg>
+  <arg choice=plain><replaceable>TEXT</replaceable></arg>
+  <arg choice=opt><replaceable>NUMBER</replaceable></arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Search and change to the directory containing the 
+<replaceable>TEXT</replaceable> string.  Parent directories are excluded from 
+string searching.
+</para>
+<para>
+For example, the command
+<screen>
+          kcd lin
+</screen>
+will match <filename>/usr/src/linux-2.x.x</filename>,
+<filename>/usr/lib/gcc-lib/i486-linux</filename>, 
+<filename>/usr/doc/SlingShot</filename>, etc.  It does not match
+<filename>/usr/src/linux-2.x.x/fs</filename> because <filename>lin</filename> appear as the 
+parent directory of <filename>fs</filename>.
+</para>
+<para>
+If you want to change to directory that contains
+some special symbols (for example, <computeroutput>&amp;</computeroutput>, <computeroutput>|</computeroutput>, etc.),
+enclose the <replaceable>TEXT</replaceable> string with single quote <computeroutput>'...'</computeroutput>.
+For example,
+<screen>
+          kcd 'b&amp;w'
+</screen>
+</para>
+<para>
+Avoid using spaces (very common in VFAT file system)
+in the <replaceable>TEXT</replaceable> string.  Some shell may not correctly 
+parse the string, resulting an error message.
+</para>
+<para>
+<replaceable>NUMBER</replaceable> is the matched directory number used in case
+of multiple matches.
+</para>
+<para>
+If the option <option>-B</option> is specified, all directories are
+searched, not just the bookmarked ones.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-b</arg>
+  <arg choice=opt><replaceable>TEXT</replaceable></arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display bookmarks matching <replaceable>TEXT</replaceable>, or all bookmark if
+<replaceable>TEXT</replaceable> is not supplied.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-ba</arg>
+  <arg choice=opt rep=repeat><replaceable>DIR</replaceable></arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Bookmark specified directories.  If none is specified,
+the current directory is used.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-br</arg>
+  <arg choice=opt rep=repeat><replaceable>DIR</replaceable></arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Remove bookmark from specified directories.  If none 
+is specified, the current directory is used.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-t</arg>
+  <arg choice=opt><replaceable>DIR</replaceable></arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display partial directory tree beginning with <replaceable>DIR</replaceable>.
+If <replaceable>DIR</replaceable> is not specified, the current directory is
+used.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-tr</arg>
+  <arg choice=opt><replaceable>DIR</replaceable></arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Like <option>-t</option> but rescan directory tree before display.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<cmdsynopsis>
+  <command>kcd</command>
+  <arg choice=plain>-T</arg>
+</cmdsynopsis>
+</term>
+<listitem><para>
+Display full directory tree.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>

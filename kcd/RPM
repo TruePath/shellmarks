@@ -1,0 +1,17 @@
+To build RPM files, follow the steps below:
+
+1 Log in as root.
+2 Copy the kcd-?.?.?.tar.gz file into /usr/src/redhat/SOURCES/
+  (where ?.?.? should be replaced by actual version number)
+3 Extract kcd-?.?.?.spec from the kcd-?.?.?.tar.gz and
+  place it in /usr/src/redhat/SPECS/
+4 Run the commands
+	cd /usr/src/redhat/SPECS
+	rpmbuild -ba kcd-?.?.?.spec
+  Generated RPM files are in /usr/src/redhat/SRPMS/ and
+  /usr/src/redhat/RPMS/
+
+Note:	The default spec file that shipped with kcd always has
+	release number 1.  If you modify/patch kcd in some ways,
+	make sure the release number and packager are modified 
+	as well.

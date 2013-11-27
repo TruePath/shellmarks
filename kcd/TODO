@@ -1,0 +1,48 @@
+TODO
+
+Description						Priority
+
+- Get rid off static_cast's 				On going
+
+- Change various variables from int to size_t		On going
+
+- MountDir only when searching				High
+
+- Bookmark tree						High
+
+- StartDir use glob					High
+
+- Implement a real help system				Medium
+
+- StartDir accepts regular expression			Medium
+
+- Use string collate					Medium
+
+- Use DocBook for man page, README			Medium
+
+- Start scan from highlighted dir			Medium
+
+- ls-lR support						Low
+
+- MANIFEST support					Low
+
+- Handle scrolling instead of using ncurses pad.	Low
+  This will save a lot of memory in UTF-8 mode.
+
+- Add new directory to .kcd.save.gz automatically	Low
+  (and quietautoscan config command)
+
+- Store configuration in .kcd.save.gz			Low
+
+- Changes to .kcd.conf rescan automatically		Low
+
+- Mouse drag support					(when ncurses is ready)
+
+- Display doc. on screen immediately w/o waiting 	?
+  for parse to finish.
+
+- Handle overlapped window in NCScreenManager		?
+
+- Handle multiple objects controlling the same window	?
+  in NCScreenManager
+

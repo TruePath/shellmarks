@@ -1,0 +1,187 @@
+#
+# Default target
+#
+
+default-target: kcdmain
+
+default-po:
+	if [ ! "@GMSGFMT@" = ":" ]; then	\
+		cd po;				\
+		$(MAKE) kcd.pot;		\
+	fi
+	perl "$(srcdir)"/scripts/copy-message.pl \
+		-d CHARSET utf-8 \
+		-d DATE "`date "+%Y-%m-%d %H:%M%z"`" \
+		-d VERSION $(VERSION) \
+		-f "$(srcdir)"/scripts/copy-message < po/kcd.pot \
+		| perl "$(srcdir)"/scripts/utf-quotes.pl > po/en_US.UTF-8.po
+	perl "$(srcdir)"/scripts/copy-message.pl \
+		-d CHARSET iso-8859-1 \
+		-d DATE "`date "+%Y-%m-%d %H:%M%z"`" \
+		-d VERSION $(VERSION) \
+		-f "$(srcdir)"/scripts/copy-message < po/kcd.pot \
+		| perl "$(srcdir)"/scripts/en_GB.pl > po/en_GB.po
+	perl "$(srcdir)"/scripts/copy-message.pl \
+		-d CHARSET utf-8 \
+		-d DATE "`date "+%Y-%m-%d %H:%M%z"`" \
+		-d VERSION $(VERSION) \
+		-f "$(srcdir)"/scripts/copy-message < po/kcd.pot \
+		| perl "$(srcdir)"/scripts/en_GB.pl \
+		| perl "$(srcdir)"/scripts/utf-quotes.pl > po/en_GB.UTF-8.po
+	if [ ! "@GMSGFMT@" = ":" ]; then	\
+		cd po;				\
+		$(MAKE);			\
+	fi
+
+#
+# Strip symbol table
+#
+
+strip:
+	strip kcdmain
+
+#
+# Clean
+#
+
+clean-subdir:
+	$(adBeginSubdir) clean $(adEndSubdir)
+
+clean-curdir:
+	rm -f $(adOBJS) kcdgz.1 kcdgz.1.gz kcdbz2.1 kcdbz2.1.bz2
+
+clean: clean-subdir clean-curdir
+
+distclean-subdir:
+	$(adBeginSubdir) distclean $(adEndSubdir)
+
+distclean-curdir: clean-curdir
+	rm -f kcdmain kcd.sh.init kcd.csh.init kcd-inst
+	rm -f config.h config.cache config.log
+	rm -f config.status Makefile curses.h
+	rm -f core "$(srcdir)"/*~
+	rm -f po/en_US.UTF-8.po po/en_GB.po po/en_GB.UTF-8.po
+
+distclean: distclean-subdir distclean-curdir
+
+mostlyclean-subdir:
+	$(adBeginSubdir) mostlyclean $(adEndSubdir)
+
+mostlyclean-curdir: clean-curdir
+
+mostlyclean: mostlyclean-subdir mostlyclean-curdir
+
+maintainer-clean-subdir:
+	$(adBeginSubdir) maintainer-clean $(adEndSubdir)
+
+maintainer-clean-curdir: distclean-curdir
+	rm -f "$(srcdir)"/NEWS "$(srcdir)/README
+	rm -f "$(srcdir)"/kcd-*.spec "$(srcdir)"/kcd.1
+	rm -f "$(srcdir)"/version.cc
+
+maintainer-clean: maintainer-clean-subdir maintainer-clean-curdir
+
+#
+# Install
+#
+
+install_mkdir:
+	if [ ! -d "$(bindir)" ]; then		\
+		mkdir -p "$(bindir)";		\
+		chmod 755 "$(bindir)";		\
+	fi
+	if [ ! -d "$(man1dir)" ]; then		\
+		mkdir -p "$(man1dir)";		\
+		chmod 755 "$(man1dir)";		\
+	fi
+	if [ -w "$(etcdir)" ]; then		\
+		if [ ! -d "$(etcdir)" ]; then	\
+			mkdir -p "$(etcdir)";	\
+			chmod 755 "$(etcdir)";	\
+		fi				\
+	else					\
+		if [ ! -d "$(etcdir2)" ]; then	\
+			mkdir -p "$(etcdir2)";	\
+			chmod 755 "$(etcdir2)";	\
+		fi				\
+	fi
+
+install: install_mkdir
+	$(INSTALL_PROGRAM) "$(srcdir)"/kcdscr "$(bindir)"/kcdscr
+	$(INSTALL_PROGRAM) kcdmain "$(bindir)"/kcdmain
+	$(INSTALL_PROGRAM) kcd-inst "$(bindir)"/kcd-inst
+	-if [ "`echo $(man1dir)/*.bz2`" != "$(man1dir)/*.bz2" -o            \
+	      "`echo /usr/man/man1/*.bz2`" != "/usr/man/man1/*.bz2" ]; then \
+		cp "$(srcdir)"/kcd.1 kcdbz2.1;                              \
+		bzip2 -9 -f kcdbz2.1;                                       \
+		$(INSTALL_DATA) kcdbz2.1.bz2 "$(man1dir)"/kcd.1.bz2;        \
+	elif [ "`echo $(man1dir)/*.gz`" != "$(man1dir)/*.gz" -o             \
+	       "`echo /usr/man/man1/*.gz`" != "/usr/man/man1/*.gz" ]; then  \
+		cp "$(srcdir)"/kcd.1 kcdgz.1;                               \
+		gzip -9 -f kcdgz.1;                                         \
+		$(INSTALL_DATA) kcdgz.1.gz "$(man1dir)"/kcd.1.gz;           \
+	else                                                                \
+		$(INSTALL_DATA) "$(srcdir)"/kcd.1 "$(man1dir)"/kcd.1;       \
+	fi
+	if [ -w "$(etcdir)" ]; then						        \
+		if [ -d "$(etcdir)"/profile.d ]; then                                   \
+			$(INSTALL_PROGRAM) kcd.sh.init "$(etcdir)"/profile.d/kcd.sh;    \
+			$(INSTALL_PROGRAM) kcd.csh.init "$(etcdir)"/profile.d/kcd.csh;  \
+		else                                                                    \
+			$(INSTALL_DATA) kcd.sh.init "$(etcdir)"/kcd.sh.init;            \
+			$(INSTALL_DATA) kcd.csh.init "$(etcdir)"/kcd.csh.init;          \
+		fi								        \
+	else									        \
+		if [ -d "$(etcdir2)"/profile.d ]; then                                  \
+			$(INSTALL_PROGRAM) kcd.sh.init "$(etcdir2)"/profile.d/kcd.sh;   \
+			$(INSTALL_PROGRAM) kcd.csh.init "$(etcdir2)"/profile.d/kcd.csh; \
+		else                                                                    \
+			$(INSTALL_DATA) kcd.sh.init "$(etcdir2)"/kcd.sh.init;           \
+			$(INSTALL_DATA) kcd.csh.init "$(etcdir2)"/kcd.csh.init;         \
+		fi								        \
+	fi
+	if [ ! "@GMSGFMT@" = ":" ]; then				 \
+		cd po;							 \
+		$(MAKE) prefix="$(prefix)" DESTDIR="$(DESTDIR)" install; \
+	fi
+
+installdoc_mkdir:
+	if [ ! -d "$(docdir)" ]; then				\
+		mkdir -p "$(docdir)";				\
+		chmod 755 "$(docdir)";				\
+	fi
+
+installdoc: installdoc_mkdir
+	$(INSTALL_DATA) README "$(docdir)"/README
+	$(INSTALL_DATA) NEWS "$(docdir)"/NEWS
+	$(INSTALL_DATA) COPYING "$(docdir)"/COPYING
+	$(INSTALL_DATA) FILELIST "$(docdir)"/FILELIST
+	$(INSTALL_DATA) INSTALL "$(docdir)"/INSTALL
+	$(INSTALL_DATA) TODO "$(docdir)"/TODO
+	$(INSTALL_DATA) BUGREPORT "$(docdir)"/BUGREPORT
+	$(INSTALL_DATA) UNICODE "$(docdir)"/UNICODE
+	$(INSTALL_DATA) RPM "$(docdir)"/RPM
+
+#
+# Development rules
+#
+
+"$(srcdir)"/aclocal.m4: "$(srcdir)"/acinclude.m4/cxxac.m4 \
+		      "$(srcdir)"/acinclude.m4/ncurses.m4 \
+		      "$(srcdir)"/acinclude.m4/zlib.m4
+	cd "$(srcdir)" && aclocal -I acinclude.m4
+
+"$(srcdir)"/config.h.in: "$(srcdir)"/config.h.bot "$(srcdir)"/acconfig.h \
+		       "$(srcdir)"/configure.in
+	cd "$(srcdir)" && autoheader && touch "$(srcdir)"/config.h.in
+
+"$(srcdir)"/configure: "$(srcdir)"/configure.in "$(srcdir)"/aclocal.m4
+	cd "$(srcdir)" && autoconf
+
+# Note: we should detect changes in source & header files too
+"$(srcdir)"/Makefile.in: "$(srcdir)"/ad.rule "$(srcdir)"/ad.append \
+		       "$(srcdir)"/ad.prepend
+	cd "$(srcdir)" && autodep
+
+html:
+	cd "$(srcdir)"/doc && rm -rf *.html && docbook2html kcd.sgml

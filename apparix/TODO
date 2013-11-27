@@ -1,0 +1,40 @@
+
+
+$  pass ls options to als et cetera.
+
+$  change to tab separated resource files.
+
+-  make backup mechanism where date tag is automatically added.
+
+-  [src] it would be neater to have the shell examples in a separate file
+   and have code that incorporates it into the C source (a la clmformat).
+
+-  enable sorting with 'apparix -l', 'apparix', possibly 'apparix -d'
+
+-  sorting for jumping can first grep the bookmark into a mini-folder.
+
+?  when a subdirectory is given it could be used to resolve
+   multiple hits (bit too fancy though).
+
+?  portal: option to prepend prefix to all bookmarks.
+   This would require change of rc format (because of rehashing)
+
+?  for a portal, optionally add a bookmark for the portal itself.
+   could do this with a two-argument invocation.
+
+#  read from $APPARIXRC (to support different file systems / machines)
+
+#  make a mode (maybe -a) to simply list all matching occurrences
+   without going into the menu if multiple matches.
+   hum ho, that's what grep is for.
+
+   note that simply 'apparix' lists all the bookmarks.
+
+#  if no exact match, make menu for strstr occurrences.
+      (e.g. strcmp/strstr callback to attempt_jump)
+   bash tab completion does this nicely.
+
+#  a 'rename' option.
+   apparix -r foo bar
+   difficult with duplicates: use editor.
+

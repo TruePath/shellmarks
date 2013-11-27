@@ -1,0 +1,44 @@
+Begin3
+Title:          kcd - Kriang's Change Directory
+Version:        %VERSION%
+Entered-date:   %LSMDATE%
+Description:    kcd allows user to change directory by using various methods:
+		- By using cursor keys to navigate through the directory tree
+		  screen
+		- By searching in directory tree screen
+		- By typing part of the directory name directly at the 
+		  command line.
+
+		Other features include:
+		- Can be configured to filter out to some subdirectories, 
+		  useful for cdrom and msdos partition mounting points
+		- Can be configured to scan directory tree starting from some
+		  specified directory inwards, for example, home directory.
+		- If the number directories that matches to the name given in
+		  the command line exceeds a specified number,  kcd displays
+		  the whole list.
+		- Faster directory rescan if old data file exists.  Only 
+		  directories with newer modified/changed time are scanned.
+		- Sorted directory tree listing.
+		- Can be installed inside your home directory for users 
+		  without root access.
+		- Mouse supported.
+
+		Shells supported: bash, tcsh, zsh, pdksh, ash
+
+		URL: http://kcd.sourceforge.net
+
+Keywords:       kcd, cd, ncd, directory, change, change directory, tree, jump
+Author:         lerdsuwa@users.sourceforge.net (Kriang Lerdsuwanakij)
+Maintained-by:  lerdsuwa@users.sourceforge.net (Kriang Lerdsuwanakij)
+Primary-site:   metalab.unc.edu /pub/Linux/utils/shell
+		%GZSIZE% kcd-%VERSION%.tar.gz
+		%LSMSIZE% kcd-%VERSION%.lsm
+Alternate-site: 
+Original-site:  
+Platforms:      gcc 2.8 and libstdc++ 2.8  or  egcs 1.0,
+		zlib 1.0.4, 
+		ncurses 1.9.9e (the oldest acceptable version but buggy)
+		  or ncurses 4.2 (recommended)
+Copying-policy: GPL 2.0
+End

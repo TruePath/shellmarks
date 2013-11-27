@@ -1,0 +1,40 @@
+BUGREPORT
+
+When kcd displays error message containing
+
+	kcd: Check the file BUGREPORT in the package for details
+
+it means that it has detect some bug in the code.  You are encouraged to
+file a bug report to either
+
+	http://sourceforge.net/bugs/?group_id=2516
+or 
+	lerdsuwa@users.sourceforge.net
+
+The bug report should include the stack frame backtrace from the core file.
+Follow the steps below for how to obtain one.  This requires that 
+gdb (GNU debugger) is installed in your machine.
+
+1. Look in the current directory that kcd fails.  There should be a file 
+named `core'.  If it does not exists, either the current directory is not
+writable or the core size limit is too small.  You can increase the
+core size limit using the command `ulimit -c 100000'.
+
+2. Locate the file `kcdmain'.  If you have already installed kcd in
+/usr/bin or /usr/local/bin., it should be there.
+
+3. Create a file, say `gdb.command', consisting of the following two lines
+
+	bt
+	quit
+
+4. Suppose that your `kcdmain' is in /usr/local/bin, and `core' is in the
+current directory (adjust the command line below otherwise), 
+issue the following command
+
+	gdb -x gdb.command /usr/local/bin/kcdmain core > backtrace
+
+5. There should be the file `backtrace' in the current directory.
+Copy and paste the file content into the bug report.  Don't forget to
+include the version number of kcd that trigger the error message.
+

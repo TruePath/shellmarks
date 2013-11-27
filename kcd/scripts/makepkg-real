@@ -1,0 +1,180 @@
+#!/bin/sh
+# makepkg-real
+# Copyright (c) 2000, 2001, 2002, 2003 Kriang Lerdsuwanakij
+# email:	lerdsuwa@users.sourceforge.net
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+if test -z "$FROM_MAKEPKG"; then
+	echo "cannot run makepkg-real directly, use makepkg or makepkg-release instead"
+	exit 0
+fi
+if test -z "$TREE_DIR"; then
+	echo "cannot run makepkg-real directly, use makepkg or makepkg-release instead"
+	exit 0
+fi
+
+make default-po
+
+#
+# Copy files to $TREE_DIR and its subdirectories
+#
+
+echo "Copying files ..."
+
+cp COPYING ChangeLog FILELIST INSTALL BUGREPORT ABOUT-NLS UNICODE	$TREE_DIR
+cp Makefile.in								$TREE_DIR
+cp RPM TODO								$TREE_DIR
+
+cp aclocal.m4								$TREE_DIR
+cp ad.append ad.prepend ad.rule						$TREE_DIR
+
+cp buffer.cc buffer.h							$TREE_DIR
+
+cp config.h.in configure configure.ac					$TREE_DIR
+
+cp conffile.cc conffile.h confobj.cc confobj.h				$TREE_DIR
+cp cstrlib.cc cstrlib.h cxxlib.h					$TREE_DIR
+cp dirobj.cc dirobj.h dirtree.cc dirtree.h dirutil.cc dirutil.h		$TREE_DIR
+cp editbox.cc editbox.h error.cc error.h				$TREE_DIR
+cp gentree.cc gentree.h gzfileio.cc gzfileio.h gtstream.h gtstream.cc	$TREE_DIR
+
+cp kcd.csh.init.in kcd.sh.init.in					$TREE_DIR
+cp kcd-inst.in								$TREE_DIR
+
+cp kcdscr kcdmain.cc							$TREE_DIR
+cp khdoc.cc khdoc.h khwin.cc khwin.h					$TREE_DIR
+cp list.h miscobj.cc miscobj.h						$TREE_DIR
+cp scandir.cc scandir.h							$TREE_DIR
+cp scrnman.cc scrnman.h scroll.cc scroll.h				$TREE_DIR
+cp seek.cc seek.h							$TREE_DIR
+cp setupcurses.h							$TREE_DIR
+cp statwin.cc statwin.h strmisc.cc strmisc.h utf8dec.cc utf8dec.h	$TREE_DIR
+cp utf8test.cc								$TREE_DIR
+
+mkdir $TREE_DIR/pkgsrc
+cp pkgsrc/NEWS.src pkgsrc/README.src pkgsrc/kcd.1.src pkgsrc/lsm.src	$TREE_DIR/pkgsrc
+cp pkgsrc/spec.src pkgsrc/version.cc.src				$TREE_DIR/pkgsrc
+cp pkgsrc/kcd.sgml.src							$TREE_DIR/pkgsrc
+
+mkdir $TREE_DIR/acinclude.m4
+cp acinclude.m4/cxxac.m4 acinclude.m4/ncurses.m4 acinclude.m4/zlib.m4	$TREE_DIR/acinclude.m4
+cp acinclude.m4/codeset.m4 acinclude.m4/gettext.m4			$TREE_DIR/acinclude.m4
+cp acinclude.m4/glibc21.m4 acinclude.m4/iconv.m4			$TREE_DIR/acinclude.m4
+cp acinclude.m4/intdiv0.m4 acinclude.m4/isc-posix.m4			$TREE_DIR/acinclude.m4
+cp acinclude.m4/lcmessage.m4 acinclude.m4/lib-ld.m4			$TREE_DIR/acinclude.m4
+cp acinclude.m4/lib-link.m4 acinclude.m4/lib-prefix.m4			$TREE_DIR/acinclude.m4
+cp acinclude.m4/progtest.m4						$TREE_DIR/acinclude.m4
+
+mkdir $TREE_DIR/doc
+cp doc/basics.sgml							$TREE_DIR/doc
+cp doc/cmdsynopsis1.sgml						$TREE_DIR/doc
+cp doc/cmdsynopsis2.sgml						$TREE_DIR/doc
+cp doc/cmdsynopsis3.sgml						$TREE_DIR/doc
+cp doc/cmdsynopsis4.sgml						$TREE_DIR/doc
+cp doc/config.sgml							$TREE_DIR/doc
+cp doc/dirwin.sgml							$TREE_DIR/doc
+cp doc/key.sgml								$TREE_DIR/doc
+cp doc/license.sgml							$TREE_DIR/doc
+cp doc/*.html								$TREE_DIR/doc
+
+mkdir $TREE_DIR/scripts
+cp scripts/README							$TREE_DIR/scripts
+cp scripts/commit scripts/commit-template				$TREE_DIR/scripts
+cp scripts/config.guess scripts/config.rpath scripts/config.sub		$TREE_DIR/scripts
+cp scripts/dircheck							$TREE_DIR/scripts
+cp scripts/locateheader.pl						$TREE_DIR/scripts
+cp scripts/makelink							$TREE_DIR/scripts
+cp scripts/makepkg scripts/makepkg-real scripts/makepkg-release		$TREE_DIR/scripts
+cp scripts/miscout scripts/rpcp						$TREE_DIR/scripts
+cp scripts/uglyboolhack.pl						$TREE_DIR/scripts
+cp scripts/version							$TREE_DIR/scripts
+cp scripts/utf-quotes.pl scripts/copy-message.pl scripts/copy-message	$TREE_DIR/scripts
+cp scripts/en_GB.pl							$TREE_DIR/scripts
+cp scripts/install-sh scripts/mkinstalldirs				$TREE_DIR/scripts
+
+mkdir $TREE_DIR/po
+cp po/boldquot.sed po/ChangeLog po/en@boldquot.header po/en@quot.header	$TREE_DIR/po
+cp po/insert-header.sin po/Makevars po/quot.sed po/remove-potcdate.sin	$TREE_DIR/po
+cp po/Rules-quot							$TREE_DIR/po
+cp po/Makefile.in.in po/POTFILES.in po/kcd.pot				$TREE_DIR/po
+if test "po/*.po" != ""; then
+	cp po/*.po							$TREE_DIR/po
+fi
+if test "po/*.gmo" != ""; then
+	cp po/*.gmo							$TREE_DIR/po
+fi
+
+#
+# Stamp version number and release date in files (except lsm.src)
+#
+
+scripts/rpcp $RPCP_FILE pkgsrc/NEWS.src $TREE_DIR/NEWS
+scripts/rpcp $RPCP_FILE pkgsrc/README.src $TREE_DIR/README
+scripts/rpcp $RPCP_FILE pkgsrc/kcd.1.src $TREE_DIR/kcd.1
+scripts/rpcp $RPCP_FILE pkgsrc/spec.src $TREE_DIR/$BASE_NAME.spec
+scripts/rpcp $RPCP_FILE pkgsrc/version.cc.src $TREE_DIR/version.cc
+
+scripts/rpcp $RPCP_FILE pkgsrc/kcd.sgml.src $TREE_DIR/doc/kcd.sgml
+
+#
+# Build .tar.gz file
+#
+
+echo "Building package ..."
+
+SAVEDIR=`pwd`
+
+cd $BUILD_DIR
+tar -cvf $BASE_NAME.tar $BASE_NAME/*
+gzip -f $BASE_NAME.tar
+
+#
+# Copy .tar.gz file to final location
+#
+
+echo "Copying to $PKGS_DIR ..."
+cd "$SAVEDIR"
+cp $BUILD_DIR/$BASE_NAME.tar.gz ../pkgs
+echo "%GZSIZE%  `scripts/miscout size $PKGS_DIR/$BASE_NAME.tar.gz`" >> $RPCP_FILE
+
+#
+# Create .lsm file with correct file sizes
+#
+
+OLD_SIZE=`scripts/miscout size pkgsrc/lsm.src`
+cp $RPCP_FILE $RPCP_LSM_FILE
+echo "%LSMSIZE%  $OLD_SIZE" >> $RPCP_LSM_FILE
+scripts/rpcp $RPCP_LSM_FILE pkgsrc/lsm.src $PKGS_DIR/$BASE_NAME.lsm
+NEW_SIZE=`scripts/miscout size $PKGS_DIR/$BASE_NAME.lsm`
+echo "lsm size: $NEW_SIZE, previous size: $OLD_SIZE"
+
+while test "$OLD_SIZE" -ne "$NEW_SIZE"; do
+	OLD_SIZE=$NEW_SIZE
+	cp $RPCP_FILE $RPCP_LSM_FILE
+	echo "%LSMSIZE%  $OLD_SIZE" >> $RPCP_LSM_FILE
+	scripts/rpcp $RPCP_LSM_FILE pkgsrc/lsm.src $PKGS_DIR/$BASE_NAME.lsm
+	NEW_SIZE=`scripts/miscout size $PKGS_DIR/$BASE_NAME.lsm`
+	echo "lsm size: $NEW_SIZE, previous size: $OLD_SIZE"
+done
+
+#
+# Copy other files
+#
+
+cp $TREE_DIR/README $PKGS_DIR/$BASE_NAME.README
+cp $TREE_DIR/NEWS $PKGS_DIR/$BASE_NAME.NEWS
+cp $TREE_DIR/"$BASE_NAME".spec $PKGS_DIR
+

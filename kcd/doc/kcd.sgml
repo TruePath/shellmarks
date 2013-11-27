@@ -1,0 +1,68 @@
+<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+  <!ENTITY Version "7.15.0">
+  <!ENTITY RelDate "Feb 18, 2009">
+  <!ENTITY cmdsynopsis1 SYSTEM "cmdsynopsis1.sgml">
+  <!ENTITY cmdsynopsis2 SYSTEM "cmdsynopsis2.sgml">
+  <!ENTITY cmdsynopsis3 SYSTEM "cmdsynopsis3.sgml">
+  <!ENTITY cmdsynopsis4 SYSTEM "cmdsynopsis4.sgml">
+  <!ENTITY basics SYSTEM "basics.sgml">
+  <!ENTITY dirwin SYSTEM "dirwin.sgml">
+  <!ENTITY config SYSTEM "config.sgml">
+  <!ENTITY key SYSTEM "key.sgml">
+  <!ENTITY license SYSTEM "license.sgml">
+]>
+
+<book>
+<bookinfo>
+<date>&RelDate;</date>
+<title>kcd &Version; User Guide</title>
+</bookinfo>
+
+<chapter><title>What is kcd?</title>
+<para>
+kcd helps you navigate through directories easily in console or
+terminal command line.  A shell alias or function is setup to provide the 
+functionality.  You can use it to jump to the desired directory through
+command line or full screen navigation.
+</para>
+<para>
+It works with shells bash, tcsh, pdksh, zsh, and ash.  Although 
+kcd is developed for Linux, it should also work with any UNIX operating 
+system with the right libraries (libc, ncurses and zlib).  To compile kcd 
+yourself, you also need a decent C++ compiler.
+</para>
+<para>
+For bug report or latest news, visit kcd home page at 
+<ulink url="http://kcd.sourceforge.net">kcd.sourceforge.net</ulink>.
+</para>
+</chapter>
+
+<chapter><title>Using kcd</title>
+&basics;
+&dirwin;
+&key;
+</chapter>
+
+<chapter><title>Command Line Options</title>
+<sect1><title>Changing Directory</title>
+&cmdsynopsis1;
+</sect1>
+<sect1><title>Scanning Directory Tree</title>
+&cmdsynopsis2;
+</sect1>
+<sect1><title>Displaying Information</title>
+&cmdsynopsis3;
+</sect1>
+<sect1><title>Installing Shell Alias or Function</title>
+&cmdsynopsis4;
+</sect1>
+</chapter>
+
+<chapter><title>Configuration File</title>
+&config;
+</chapter>
+
+<chapter><title>Credits and Licenses</title>
+&license;
+</chapter>
+</book>

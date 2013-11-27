@@ -1,0 +1,20 @@
+# kcd.sh.init
+# Must be invoked by "." or "source" command
+
+# Add to PATH environment variable if it is not there
+# This is to avoid unnecessary change to the order of search
+echo ":$PATH:" | grep ':@prefix@/bin:' > /dev/null
+if [ $? -ne 0 ]; then
+	PATH="@prefix@/bin:$PATH"
+fi
+
+# Setup variables required to run kcd here
+#  LD_LIBRARY_PATH="/blah/blah/blah"; export LD_LIBRARY_PATH
+#  TERMINFO="/blah/blah/blah"; export TERMINFO
+
+# Install kcd shell function/alias
+if [ ! "$SHELL" = "/bin/ash" ]; then
+	eval `kcdmain -ias "@prefix@"/bin`
+else
+	eval `kcdmain -ifs "@prefix@"/bin`
+fi
